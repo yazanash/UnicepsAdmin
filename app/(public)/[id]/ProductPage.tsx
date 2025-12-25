@@ -17,6 +17,14 @@ const ProductPage = ({ data }: { data: ProductLandingData }) => {
       </HeroWrapper>
       <section className="py-24 px-6 relative">
         <div className="max-w-7xl mx-auto">
+           <div className="text-center mb-16">
+          <h2 className="text-[#46cdcf] font-medium mb-2 uppercase tracking-widest text-sm">
+             الميزات
+          </h2>
+          <h3 className="text-4xl font-bold text-white">
+           ما يوفره لك Uniceps
+          </h3>
+        </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {data.features.map((feature) => (
               <FeaturesSection key={feature.id} feature={feature} />
