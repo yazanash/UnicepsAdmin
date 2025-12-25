@@ -36,7 +36,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
       {releases.map((rel) => (
         <a
           key={rel.id}
-         href={`${BASE_URL}/api/Release/download/${rel.id}`}
+         href={`${BASE_URL}/Release/download/${rel.id}`}
           target="_blank"
           rel="noopener noreferrer"
           title={`Download for ${rel.targetOS}`} // يظهر النص عند وضع الماوس
