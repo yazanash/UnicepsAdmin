@@ -42,7 +42,7 @@ const GlassCard = ({ reverse = false, product }: GlassCardProps) => {
 
         <div className="mt-auto w-full flex justify-center md:justify-start">
           <Link href={`/${product.id}`}>
-            <button className="px-8 py-4 rounded-2xl bg-gradient-to-r from-[#0095A6] to-[#46cdcf] hover:shadow-[0_0_20px_rgba(0,149,166,0.4)] text-white font-bold transition-all duration-300">
+            <button className="px-8 py-4 rounded-2xl bg-linear-to-r from-[#0095A6] to-[#46cdcf] hover:shadow-[0_0_20px_rgba(0,149,166,0.4)] text-white font-bold transition-all duration-300">
               Download App
             </button>
           </Link>
