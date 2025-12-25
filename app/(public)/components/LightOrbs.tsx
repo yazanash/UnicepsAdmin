@@ -1,50 +1,40 @@
 import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
-interface LightOrbsProps {
-  activeIndex?: number;
-}
-const LightOrbs = ({ activeIndex = 0 }: LightOrbsProps) => {
-  const orbMovements = [
-    {
-      orbBottomLeft: { bottom: "5%", left: "-10%", scale: 1, opacity: 0.3 },
-      orbTopRight: { top: "5%", right: "-10%", scale: 1, opacity: 0.25 },
-    },
-    {
-      orbBottomLeft: { bottom: "15%", left: "5%", scale: 1.1, opacity: 0.35 },
-      orbTopRight: { top: "15%", right: "5%", scale: 0.9, opacity: 0.2 },
-    },
-    {
-      orbBottomLeft: { bottom: "0%", left: "0%", scale: 0.9, opacity: 0.25 },
-      orbTopRight: { top: "0%", right: "0%", scale: 1.2, opacity: 0.3 },
-    },
-  ];
+import { motion } from "framer-motion";
 
-  const current = orbMovements[activeIndex % orbMovements.length];
-
+const LightOrbs = () => {
   return (
     <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-      {/* Orb 1: منطقة أسفل اليسار (Bottom-Left) */}
+      {/* Orb 1: حركة عائمة ومستقلة */}
       <motion.div
         animate={{
-          bottom: current.orbBottomLeft.bottom,
-          left: current.orbBottomLeft.left,
-          scale: current.orbBottomLeft.scale,
-          opacity: current.orbBottomLeft.opacity,
+          x: [0, 50, -30, 0], // تحريك أفقي عشوائي
+          y: [0, -40, 20, 0], // تحريك رأسي عشوائي
+          scale: [1, 1.1, 0.9, 1],
         }}
-        transition={{ type: "spring", stiffness: 20, damping: 25 }} // حركة هادئة جداً
-        className="absolute w-150 h-150 bg-[#0095A6] rounded-full blur-[130px]"
+        transition={{
+          duration: 15, // وقت طويل ليكون التغيير ناعم جداً وغير محسوس
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        // استخدام translateZ(0) لتفعيل تسريع الـ GPU
+        style={{ transform: 'translateZ(0)' }} 
+        className="absolute -bottom-20 -left-20 w-150 h-150 bg-[#0095A6] rounded-full blur-[100px] opacity-30"
       />
 
-      {/* Orb 2: منطقة أعلى اليمين (Top-Right) */}
+      {/* Orb 2: حركة عكسية */}
       <motion.div
         animate={{
-          top: current.orbTopRight.top,
-          right: current.orbTopRight.right,
-          scale: current.orbTopRight.scale,
-          opacity: current.orbTopRight.opacity,
+          x: [0, -60, 40, 0],
+          y: [0, 50, -30, 0],
+          scale: [1, 0.9, 1.1, 1],
         }}
-        transition={{ type: "spring", stiffness: 20, damping: 25 }}
-        className="absolute w-150 h-150 bg-[#46cdcf] rounded-full blur-[140px]"
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        style={{ transform: 'translateZ(0)' }}
+        className="absolute -top-20 -right-20 w-150 h-150 bg-[#46cdcf] rounded-full blur-[110px] opacity-20"
       />
     </div>
   );
