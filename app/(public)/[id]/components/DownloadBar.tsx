@@ -11,7 +11,7 @@ import { TargetOSEnum, DownloadSourceEnum, ReleaseType } from "@/types/release";
 
 export default function DownloadBar({ releases }: { releases: ReleaseType[] }) {
   if (!releases || releases.length === 0) return null;
-
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   // وظيفة لجلب الأيقونة المناسبة
   const getIcon = (os: TargetOSEnum, source: DownloadSourceEnum) => {
     switch (source) {
@@ -36,7 +36,7 @@ export default function DownloadBar({ releases }: { releases: ReleaseType[] }) {
       {releases.map((rel) => (
         <a
           key={rel.id}
-          href={rel.downloadUrl}
+         href={`${BASE_URL}/api/Release/download/${rel.id}`}
           target="_blank"
           rel="noopener noreferrer"
           title={`Download for ${rel.targetOS}`} // يظهر النص عند وضع الماوس
