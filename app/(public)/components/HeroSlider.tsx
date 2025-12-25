@@ -16,7 +16,7 @@ interface HeroSliderProps {
 }
 const HeroSlider = ({ onSlideChange,products }: HeroSliderProps) => {
   return (
-    <div className="relative z-10 w-full h-full mx-auto px-6">
+    <div className="relative z-10 w-full h-full mx-auto">
       <Swiper
         modules={[Autoplay, Navigation, Pagination]}
         spaceBetween={20}

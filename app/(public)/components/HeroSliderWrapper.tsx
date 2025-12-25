@@ -11,7 +11,7 @@ const HeroSliderWrapper = ({ products }: HeroSliderWrapperProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
     <HeroWrapper>
-      <LightOrbs/>
+      <LightOrbs activeIndex={activeIndex}/>
       <HeroSlider products={products} onSlideChange={setActiveIndex} />
     </HeroWrapper>
   );
