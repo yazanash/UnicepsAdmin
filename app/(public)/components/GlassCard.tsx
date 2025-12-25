@@ -22,7 +22,7 @@ const GlassCard = ({ reverse = false, product }: GlassCardProps) => {
       rounded-3xl
       p-10
       grid grid-cols-1 md:grid-cols-2
-      gap-10
+      gap-2
     "
     >
       {/* Text */}
