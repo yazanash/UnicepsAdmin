@@ -28,7 +28,7 @@ const GlassCard = ({ reverse = false , product}:GlassCardProps) => {
       {/* Text */}
       <div
         className={`flex flex-col justify-center items-center ${
-          reverse ? "md:order-2" : ""
+          reverse ? "order-2" : ""
         }`}
       >
         <h1 className="text-4xl font-bold text-white mb-4">
@@ -54,7 +54,7 @@ const GlassCard = ({ reverse = false , product}:GlassCardProps) => {
       {/* Image */}
      <div
   className={`flex items-center justify-center ${
-    reverse ? "md:order-1" : ""
+    reverse ? "order-1" : ""
   }`}
 >
   {/* الحاوية الخلفية الملونة */}
