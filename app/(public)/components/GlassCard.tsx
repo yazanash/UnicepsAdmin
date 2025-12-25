@@ -25,7 +25,7 @@ const GlassCard = ({ reverse = false, product }: GlassCardProps) => {
     >
       {/* Text Section */}
       <div
-        className={`flex flex-col justify-center items-center text-center md:text-left md:items-start order-2 ${
+        className={`flex flex-col justify-center items-center text-center order-2 ${
           reverse ? "md:order-2" : "md:order-1"
         }`}
       >
