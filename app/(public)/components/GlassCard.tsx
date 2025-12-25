@@ -39,6 +39,7 @@ const GlassCard = ({ reverse = false, product }: GlassCardProps) => {
             className="
           px-6 py-3 rounded-xl
           bg-linear-to-r from-[#0095A6]/80 to-[#46cdcf]/80
+          hover:bg-linear-to-r hover:to-[#0095A6]/80 hover:from-[#46cdcf]/80
           text-white font-bold
         "
           >
@@ -58,7 +59,7 @@ const GlassCard = ({ reverse = false, product }: GlassCardProps) => {
           className="
       relative
       w-full 
-       md:aspect-auto md:h-112.5
+      aspect-3/4 md:aspect-auto md:h-112.5
       rounded-3xl 
       flex items-center justify-center 
       p-4 md:p-10
