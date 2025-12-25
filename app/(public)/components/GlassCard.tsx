@@ -53,33 +53,34 @@ const GlassCard = ({ reverse = false , product}:GlassCardProps) => {
 
       {/* Image */}
      <div
-  className={`flex items-center justify-center ${
-    reverse ? "order-1" : ""
+  className={`flex items-center justify-center w-full ${
+    reverse ? "md:order-1" : ""
   }`}
 >
-  {/* الحاوية الخلفية الملونة */}
+  {/* الحاوية الخلفية الملونة - أزلنا الارتفاع الثابت واستخدمنا aspect ratio */}
   <div
     className="
       relative
       w-full 
-      min-h-75 md:min-h-100 
+      aspect-square md:aspect-auto md:h-112.5
+      bg-white/5 
       rounded-3xl 
       flex items-center justify-center 
-      p-6
+      p-4 md:p-10
       group
     "
   >
-    {/* الصورة */}
-    <div className="relative w-full h-full min-h-62.5 md:min-h-87.5">
+    {/* حاوية الصورة المباشرة */}
+    <div className="relative w-full h-full">
       <Image
         src={imageSrc}
         alt={product.name}
         fill
-        sizes="(max-width: 768px) 100vw, 50vw"
+        sizes="(max-width: 768px) 90vw, 40vw"
         priority
         className="
           object-contain 
-          drop-shadow-[0_20px_50px_rgba(70,205,207,0.5)] 
+          drop-shadow-[0_20px_50px_rgba(70,205,207,0.3)] 
           transition-transform 
           duration-500 
           group-hover:scale-105
