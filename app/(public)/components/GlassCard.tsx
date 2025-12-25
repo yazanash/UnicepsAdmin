@@ -58,7 +58,7 @@ const GlassCard = ({ reverse = false, product }: GlassCardProps) => {
           className="
       relative
       w-full 
-      aspect-3/4 md:aspect-auto md:h-112.5
+       md:aspect-auto md:h-112.5
       rounded-3xl 
       flex items-center justify-center 
       p-4 md:p-10
