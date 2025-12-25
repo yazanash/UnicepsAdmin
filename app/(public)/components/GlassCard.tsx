@@ -32,7 +32,7 @@ const GlassCard = ({ reverse = false, product }: GlassCardProps) => {
         <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
           {product.name}
         </h1>
-        <p className="text-white/70 text-lg mb-8 max-w-md leading-relaxed">
+        <p className="text-white/70 text-base mb-8 max-w-md leading-relaxed">
           {product.description}
         </p>
 
