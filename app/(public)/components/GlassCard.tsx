@@ -1,15 +1,15 @@
-"use client"
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { ProductType } from "@/types/products";
-interface GlassCardProps{
-  product:ProductType;
-  reverse?:boolean  
+interface GlassCardProps {
+  product: ProductType;
+  reverse?: boolean;
 }
-const GlassCard = ({ reverse = false , product}:GlassCardProps) => {
+const GlassCard = ({ reverse = false, product }: GlassCardProps) => {
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-  const imageSrc = product.heroImage 
-    ? `${BASE_URL}${product.heroImage}` 
+  const imageSrc = product.heroImage
+    ? `${BASE_URL}${product.heroImage}`
     : "/placeholder-app.png";
   return (
     <div
@@ -28,15 +28,11 @@ const GlassCard = ({ reverse = false , product}:GlassCardProps) => {
       {/* Text */}
       <div
         className={`flex flex-col justify-center items-center ${
-          reverse ? "order-2" : ""
+          reverse ? " md:order-2" : ""
         }`}
       >
-        <h1 className="text-4xl font-bold text-white mb-4">
-         {product.name}
-        </h1>
-        <p className="text-white/80 mb-6">
-          {product.description}
-        </p>
+        <h1 className="text-4xl font-bold text-white mb-4">{product.name}</h1>
+        <p className="text-white/80 mb-6">{product.description}</p>
 
         <Link href={`/${product.id}`}>
           <button
@@ -52,43 +48,42 @@ const GlassCard = ({ reverse = false , product}:GlassCardProps) => {
       </div>
 
       {/* Image */}
-     <div
-  className={`flex items-center justify-center w-full ${
-    reverse ? "md:order-1" : ""
-  }`}
->
-  {/* الحاوية الخلفية الملونة - أزلنا الارتفاع الثابت واستخدمنا aspect ratio */}
-  <div
-    className="
+      <div
+        className={`flex items-center justify-center w-full ${
+          reverse ? "md:order-1" : ""
+        }`}
+      >
+        {/* الحاوية الخلفية الملونة - أزلنا الارتفاع الثابت واستخدمنا aspect ratio */}
+        <div
+          className="
       relative
       w-full 
-      aspect-square md:aspect-auto md:h-112.5
-      bg-white/5 
+      aspect-3/4 md:aspect-auto md:h-112.5
       rounded-3xl 
       flex items-center justify-center 
       p-4 md:p-10
       group
     "
-  >
-    {/* حاوية الصورة المباشرة */}
-    <div className="relative w-full h-full">
-      <Image
-        src={imageSrc}
-        alt={product.name}
-        fill
-        sizes="(max-width: 768px) 90vw, 40vw"
-        priority
-        className="
+        >
+          {/* حاوية الصورة المباشرة */}
+          <div className="relative w-full h-full">
+            <Image
+              src={imageSrc}
+              alt={product.name}
+              fill
+              sizes="(max-width: 768px) 90vw, 40vw"
+              priority
+              className="
           object-contain 
           drop-shadow-[0_20px_50px_rgba(70,205,207,0.3)] 
           transition-transform 
           duration-500 
           group-hover:scale-105
         "
-      />
-    </div>
-  </div>
-</div>
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
