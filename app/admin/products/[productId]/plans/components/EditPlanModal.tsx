@@ -44,19 +44,7 @@ const EditPlanModal = ({ plan, onSave }: EditPlanModalProps) => {
               }
             />
           </div>
-          <div>
-            <label>Target User Type</label>
-            <Input
-              type="number"
-              value={editedPlan.targetUserType}
-              onChange={(e) =>
-                setEditedPlan({
-                  ...editedPlan,
-                  targetUserType: Number(e.target.value),
-                })
-              }
-            />
-          </div>
+          
         </div>
         <DialogFooter>
           <Button onClick={handleSave}>Save</Button>
