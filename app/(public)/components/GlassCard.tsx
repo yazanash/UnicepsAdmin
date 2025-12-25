@@ -25,22 +25,28 @@ const GlassCard = ({ reverse = false, product }: GlassCardProps) => {
     >
       {/* Text Section */}
       <div
-        className={`flex flex-col justify-center items-center text-center order-2 ${
+        className={`flex flex-col justify-between h-full text-center md:text-left md:items-start order-2 ${
           reverse ? "md:order-2" : "md:order-1"
         }`}
       >
-        <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
-          {product.name}
-        </h1>
-        <p className="text-white/70 text-base mb-8 max-w-md leading-relaxed">
-          {product.description}
-        </p>
+        <div className="flex flex-col items-center md:items-start">
+          <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
+            {product.name}
+          </h1>
 
-        <Link href={`/${product.id}`}>
-          <button className="px-8 py-4 rounded-2xl bg-linear-to-r from-[#0095A6] to-[#46cdcf] hover:shadow-[0_0_20px_rgba(0,149,166,0.4)] text-white font-bold transition-all duration-300">
-            Download App
-          </button>
-        </Link>
+          {/* هنا السر: تحديد أقصى عدد أسطر للنص الوصفي لكي لا يختفي الزر */}
+          <p className="text-white/70 text-base md:text-lg mb-6 max-w-md leading-relaxed line-clamp-4 md:line-clamp-none">
+            {product.description}
+          </p>
+        </div>
+
+        <div className="mt-auto w-full flex justify-center md:justify-start">
+          <Link href={`/${product.id}`}>
+            <button className="px-8 py-4 rounded-2xl bg-gradient-to-r from-[#0095A6] to-[#46cdcf] hover:shadow-[0_0_20px_rgba(0,149,166,0.4)] text-white font-bold transition-all duration-300">
+              Download App
+            </button>
+          </Link>
+        </div>
       </div>
 
       {/* Image Section - هنا التغيير لزيادة الحجم */}
