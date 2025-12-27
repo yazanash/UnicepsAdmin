@@ -25,6 +25,8 @@ const UserStepModal = ({ productId, userStep, onSave }: UserStepModalProps) => {
     stepNumber: 0,
     title: "",
     description: "",
+     titleAr: "",
+    descriptionAr: "",
     productId,
   });
   const [open, setOpen] = useState(false);
@@ -33,7 +35,8 @@ const UserStepModal = ({ productId, userStep, onSave }: UserStepModalProps) => {
     if (userStep) {
       setItem(userStep);
     } else {
-      setItem({ title: "", description: "", productId });
+      setItem({ title: "", description: "", titleAr: "",
+    descriptionAr: "", productId });
     }
   }, [userStep, open]);
   const handleAdd = () => {
@@ -43,12 +46,14 @@ const UserStepModal = ({ productId, userStep, onSave }: UserStepModalProps) => {
     setItem({
       stepNumber: 0,
       title: "",
-      description: "",
+      description: "", titleAr: "",
+    descriptionAr: "",
       productId,
     });
     setOpen(false);
     if (!isEdit) {
-      setItem({ title: "", description: "", productId , stepNumber: 0});
+      setItem({ title: "", description: "", titleAr: "",
+    descriptionAr: "", productId , stepNumber: 0});
     }
   };
   return (
@@ -89,12 +94,29 @@ const UserStepModal = ({ productId, userStep, onSave }: UserStepModalProps) => {
               onChange={(e) => setItem({ ...newItem, title: e.target.value })}
             />
           </div>
+           <div>
+            <Label>Arabic Title</Label>
+            <Input
+              value={newItem.titleAr || ""}
+              onChange={(e) => setItem({ ...newItem, titleAr: e.target.value })}
+            />
+          </div>
           <div className="col-span-3 space-y-2">
             <Label>Description</Label>
             <Textarea
               value={newItem.description || ""}
               onChange={(e) =>
                 setItem({ ...newItem, description: e.target.value })
+              }
+              rows={4}
+            />
+          </div>
+           <div className="col-span-3 space-y-2">
+            <Label>Arabic Description</Label>
+            <Textarea
+              value={newItem.descriptionAr || ""}
+              onChange={(e) =>
+                setItem({ ...newItem, descriptionAr: e.target.value })
               }
               rows={4}
             />

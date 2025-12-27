@@ -20,10 +20,12 @@ interface AddFeatureModalProps {
   feature?: FeatureType;
   onSave: (feature: FeatureType) => void;
 }
-const FeatureModal = ({ productId,feature, onSave }: AddFeatureModalProps) => {
+const FeatureModal = ({ productId, feature, onSave }: AddFeatureModalProps) => {
   const [newItem, setItem] = useState<Partial<FeatureType>>({
     title: "",
     description: "",
+    titleAr: "",
+    descriptionAr: "",
     productId,
   });
   const [open, setOpen] = useState(false);
@@ -32,7 +34,13 @@ const FeatureModal = ({ productId,feature, onSave }: AddFeatureModalProps) => {
     if (feature) {
       setItem(feature);
     } else {
-      setItem({ title: "", description: "", productId });
+      setItem({
+        title: "",
+        description: "",
+        titleAr: "",
+        descriptionAr: "",
+        productId,
+      });
     }
   }, [feature, open]);
   const handleAdd = () => {
@@ -42,34 +50,51 @@ const FeatureModal = ({ productId,feature, onSave }: AddFeatureModalProps) => {
     setItem({
       title: "",
       description: "",
+      titleAr: "",
+      descriptionAr: "",
       productId,
     });
     setOpen(false);
     if (!isEdit) {
-      setItem({ title: "", description: "", productId });
+      setItem({
+        title: "",
+        description: "",
+        titleAr: "",
+        descriptionAr: "",
+        productId,
+      });
     }
   };
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         {isEdit ? (
-          <Button variant="ghost" size="icon">Edit</Button> // شكل زر التعديل في الجدول
+          <Button variant="ghost" size="icon">
+            Edit
+          </Button> // شكل زر التعديل في الجدول
         ) : (
           <Button>Add Feature</Button> // شكل زر الإضافة الرئيسي
         )}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{isEdit ? "Edit Feature" : "Add New Feature"}</DialogTitle>
+          <DialogTitle>
+            {isEdit ? "Edit Feature" : "Add New Feature"}
+          </DialogTitle>
         </DialogHeader>
         <div className="space-y-2">
           <div>
             <label>Title</label>
             <Input
               value={newItem.title || ""}
-              onChange={(e) =>
-                setItem({ ...newItem, title: e.target.value })
-              }
+              onChange={(e) => setItem({ ...newItem, title: e.target.value })}
+            />
+          </div>
+          <div>
+            <label>Arabic Title</label>
+            <Input
+              value={newItem.titleAr || ""}
+              onChange={(e) => setItem({ ...newItem, titleAr: e.target.value })}
             />
           </div>
           <div className="col-span-3 space-y-2">
@@ -82,9 +107,21 @@ const FeatureModal = ({ productId,feature, onSave }: AddFeatureModalProps) => {
               rows={4}
             />
           </div>
+          <div className="col-span-3 space-y-2">
+            <Label>Arabic Description</Label>
+            <Textarea
+              value={newItem.descriptionAr || ""}
+              onChange={(e) =>
+                setItem({ ...newItem, descriptionAr: e.target.value })
+              }
+              rows={4}
+            />
+          </div>
         </div>
         <DialogFooter>
-          <Button onClick={handleAdd}>{isEdit ? "Save Changes" : "Add Feature"}</Button>
+          <Button onClick={handleAdd}>
+            {isEdit ? "Save Changes" : "Add Feature"}
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

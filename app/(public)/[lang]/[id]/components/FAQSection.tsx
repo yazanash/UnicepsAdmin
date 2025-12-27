@@ -6,11 +6,16 @@ import { ChevronDown } from "lucide-react";
 
 interface FAQSectionProps {
   faqs: FAQsType[];
+  lang: string;
+  dict: {
+    badge: string;  // "الأسئلة الشائعة"
+    title: string;  // "هل لديك استفسارات؟"
+  };
 }
 
-const FAQSection = ({ faqs }: FAQSectionProps) => {
+const FAQSection = ({ faqs, lang, dict }: FAQSectionProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-
+  const isAr = lang === "ar";
   if (faqs.length === 0) return null;
 
   return (
@@ -18,8 +23,8 @@ const FAQSection = ({ faqs }: FAQSectionProps) => {
       <div className="max-w-3xl mx-auto">
         {/* عنوان القسم */}
         <div className="text-center mb-16">
-          <h2 className="text-[#46cdcf] font-medium mb-4 uppercase tracking-widest text-sm">الأسئلة الشائعة</h2>
-          <h3 className="text-3xl md:text-4xl font-bold text-white">هل لديك استفسارات؟</h3>
+          <h2 className="text-[#46cdcf] font-medium mb-4 uppercase tracking-widest text-sm">{dict.badge} </h2>
+          <h3 className="text-3xl md:text-4xl font-bold text-white">{dict.title} </h3>
         </div>
 
         {/* قائمة الأسئلة */}
@@ -29,9 +34,12 @@ const FAQSection = ({ faqs }: FAQSectionProps) => {
               key={faq.id}
               className="border border-white/10 rounded-2xl bg-white/5 overflow-hidden backdrop-blur-md"
             >
-              <button
+             <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full p-6 flex items-center justify-between text-right transition-colors hover:bg-white/5"
+                // تم تعديل التنسيق ليدعم اتجاه النص RTL/LTR برمجياً
+                className={`w-full p-6 flex items-center justify-between transition-colors hover:bg-white/5 ${
+                  isAr ? "flex-row text-right" : "flex-row-reverse text-left"
+                }`}
               >
                 <motion.span 
                   animate={{ rotate: openIndex === index ? 180 : 0 }}
@@ -40,7 +48,7 @@ const FAQSection = ({ faqs }: FAQSectionProps) => {
                   <ChevronDown size={20} />
                 </motion.span>
                 <span className="text-lg font-semibold text-white/90">
-                  {faq.question}
+                {isAr ? faq.questionAr : faq.question}
                 </span>
               </button>
 
@@ -52,8 +60,10 @@ const FAQSection = ({ faqs }: FAQSectionProps) => {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                   >
-                    <div className="px-6 pb-6 text-gray-400 leading-relaxed border-t border-white/5 pt-4">
-                      {faq.answer}
+                   <div className={`px-6 pb-6 text-gray-400 leading-relaxed border-t border-white/5 pt-4 ${
+                      isAr ? "text-right" : "text-left"
+                    }`}>
+                      {isAr ? faq.answerAr : faq.answer}
                     </div>
                   </motion.div>
                 )}

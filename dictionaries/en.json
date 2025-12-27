@@ -1,0 +1,76 @@
+{
+  "common": {
+    "download": "Download Now",
+    "viewDetails": "View Details",
+    "free": "Free"
+  },
+  "navbar": {
+    "adminDashboard": "Admin Dashboard"
+  },
+  "productPage": {
+    "featuresBadge": "Features",
+    "featuresTitle": "What Uniceps Provides",
+    "stepsBadge": "Simple Steps",
+    "stepsTitle": "How to start with Uniceps?",
+    "faqBadge": "FAQ",
+    "faqTitle": "Have any questions?",
+    "pricingTitle": "Subscription Plans",
+    "pricingDesc": "We provide flexible systems tailored to your business size, explore the options available for each package",
+    "free": "Free",
+    "availableOptions": "Available options for this package",
+    "featureFullAccess": "Full access to features",
+    "featureUpdates": "Automatic updates"
+  },
+  "whyUniceps": {
+    "badge": "Innovation in Sports Management",
+    "title": "Why is <span class='text-[#0095A6]'>Uniceps</span> your best choice?",
+    "p1": "We designed the system to end the era of chaos. By integrating <span class='text-white'>club management</span> and <span class='text-white'>player tracking</span> into one system, we ensure a super-smooth data flow.",
+    "p2": "Using <span class='text-[#46cdcf] font-mono'>.unx</span> file technology, we give coaches the ability to export their programs and deliver them instantly to subscribers, improving service quality and player results."
+  },
+    "solution": {
+    "title": "Our Smart Solutions",
+    "description": "A system of components that includes all the components of your sports and management meal plan through our own products.",
+   "action": "Explore"
+  },
+  "promises": {
+    "badge": "Our Commitment",
+    "title": "Our promises upon which we build the <span class='text-gray-500'>future of Uniceps</span>",
+    "description": "We believe technology should serve sport, not complicate it. Here is what we promise when you join us.",
+    "list": [
+      {
+        "title": "Extreme Accuracy",
+        "desc": "No room for error in financial calculations or player records. Our system is designed to work with 100% accuracy."
+      },
+      {
+        "title": "Seamless User Experience",
+        "desc": "Simple and beautiful interfaces make dealing with the system a pleasure, not an administrative burden."
+      },
+      {
+        "title": "Real Technical Support",
+        "desc": "We are not just code; we are a full technical team standing behind you to ensure your club's success."
+      },
+      {
+        "title": "Non-stop Evolution",
+        "desc": "Free regular updates ensure you keep pace with the latest global sports management technologies."
+      }
+    ]
+  },
+  "finalCTA": {
+    "title": "Ready to turn your club into a <span class='text-transparent bg-clip-text bg-gradient-to-r from-[#0095A6] to-[#46cdcf]'>digital ecosystem?</span>",
+    "description": "Whether you are a player looking for professional tracking, or a club owner who wants full control over management.. Uniceps is the solution.",
+    "mobileBtn": "Download Mobile App",
+    "desktopBtn": "Request Desktop Version"
+  },
+  "footer": {
+    "description": "An integrated system for sports club management and player performance tracking. Providing you the tools to take your club to the next digital level.",
+    "productsTitle": "Products",
+    "products": ["Mobile App", "Desktop Admin Version", ".unx File System"],
+    "supportTitle": "Support & Help",
+    "supportLinks": ["FAQ", "Privacy Policy"],
+    "helpText": "Need help?",
+    "socialTitle": "Stay Connected",
+    "socialDesc": "Follow us on social media platforms to stay updated with the latest updates.",
+    "rights": "© 2025 Uniceps Ecosystem. All rights reserved.",
+    "passion": "Made with passion for the Arab sports community"
+  }
+}

@@ -45,8 +45,8 @@ const items = [
     icon: DollarSignIcon,
   },
   {
-    title: "Settings",
-    url: "/admin/site-settings",
+    title: "Admins",
+    url: "/admin/admins",
     icon: Settings,
   },
 ];
@@ -55,7 +55,8 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader>
-        <div className="flex flex-row items-center">
+        <div>
+          <Link href='/'  className="flex flex-row items-center">
           <Image
             src="/Logo/Uni-Logo.png"
             alt="Uniceps logo"
@@ -64,6 +65,8 @@ export function AppSidebar() {
             className="mr-2"
           ></Image>
           <div>Uniceps - Admin</div>
+          </Link>
+
         </div>
       </SidebarHeader>
       <SidebarContent>

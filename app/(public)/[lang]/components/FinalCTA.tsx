@@ -1,7 +1,7 @@
 "use client"
 import { motion } from "framer-motion";
 
-const FinalCTA = () => {
+const FinalCTA = ({ content }: { content: any }) => {
   return (
     <section className="py-24 px-6 relative overflow-x-hidden">
       {/* إضاءة خلفية قوية لهذا القسم خصيصاً */}
@@ -18,15 +18,10 @@ const FinalCTA = () => {
         <div className="absolute bottom-0 left-0 w-32 h-32 bg-linear-to-tr from-[#0095A6]/20 to-transparent blur-2xl" />
 
         <div className="relative z-10">
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-8">
-            جاهز لتحويل ناديك إلى <br />
-            <span className="bg-clip-text text-transparent bg-linear-to-r from-[#0095A6] to-[#46cdcf]">
-              منظومة رقمية؟
-            </span>
-          </h2>
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-8" dangerouslySetInnerHTML={{ __html: content.title }} />
           
           <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12">
-            سواء كنت لاعباً يبحث عن الاحترافية في التتبع، أو صاحب نادي يريد السيطرة الكاملة على الإدارة.. Uniceps هو الحل.
+           {content.description}
           </p>
 
           <div className="flex flex-col md:flex-row gap-6 justify-center">
@@ -36,7 +31,7 @@ const FinalCTA = () => {
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 bg-white text-black font-bold rounded-2xl hover:bg-[#46cdcf] transition-colors"
             >
-              تحميل تطبيق الموبايل
+            {content.mobileBtn}
             </motion.button>
 
             {/* زر الديسكتوب */}
@@ -45,7 +40,7 @@ const FinalCTA = () => {
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 bg-transparent border-2 border-white/20 text-white font-bold rounded-2xl hover:border-[#0095A6] transition-colors"
             >
-              طلب نسخة الديسكتوب
+            {content.desktopBtn}
             </motion.button>
           </div>
         </div>

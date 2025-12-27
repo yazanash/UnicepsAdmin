@@ -16,6 +16,8 @@ export interface ProductType{
     name: string,
     platform: PlatformEnum,
     description: string,
+    nameAr:string;
+    descriptionAr:string;
     heroImage: string,
     appId: number
 }

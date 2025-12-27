@@ -3,17 +3,23 @@ import { motion } from "framer-motion";
 import { UserStepType } from "@/types/userStep";
 interface StepsSectionProps {
   steps: UserStepType[];
+  lang: string;
+  dict: {
+    badge: string;  // أضفنا هذا لاستقبال العناوين من الـ JSON
+    title: string;
+  };
 }
-const StepsSection = ({ steps }: StepsSectionProps) => {
+const StepsSection = ({ steps,lang,dict}: StepsSectionProps) => {
+  const isAr = lang === "ar";
   return (
     <section className="py-24 px-6 relative bg-black">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-[#46cdcf] font-medium mb-2 uppercase tracking-widest text-sm">
-            خطوات بسيطة
+           {dict.badge}
           </h2>
           <h3 className="text-4xl font-bold text-white">
-            كيف تبدأ مع Uniceps؟
+         {dict.title}
           </h3>
         </div>
 
@@ -38,12 +44,12 @@ const StepsSection = ({ steps }: StepsSectionProps) => {
                 {step.stepNumber}
               </div>
                 <h4 className="text-2xl font-bold text-white mx-4">
-                {step.title}
+               {isAr ? step.titleAr : step.title}
               </h4>
               </div>
              
               <p className="text-gray-400 leading-relaxed text-sm">
-                {step.description}
+               {isAr ? step.descriptionAr : step.description}
               </p>
             </motion.div>
           ))}

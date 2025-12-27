@@ -1,6 +1,6 @@
 "use client"
 import { motion } from "framer-motion";
-const WhyUniceps = () => {
+const WhyUniceps = ({ content }: { content: any }) => {
    return (
     <section className="relative py-32 px-6 bg-black overflow-hidden">
       {/* خلفية ضوئية خافتة ثابتة خلف النص */}
@@ -17,10 +17,10 @@ const WhyUniceps = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <span className="inline-block text-[#46cdcf] font-medium tracking-[0.2em] text-sm mb-4 uppercase">
-             Innovation in sports management
+          {content.badge}
             </span>
-            <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
-                 Why <span className="text-[#0095A6]">Uniceps</span> is your best choice?
+            <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight" dangerouslySetInnerHTML={{ __html: content.title }}>
+                
             </h2>
           </motion.div>
 
@@ -32,12 +32,8 @@ const WhyUniceps = () => {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
             className="space-y-6 border-r-2 border-[#46cdcf]/20 pr-8"
           >
-            <p className="text-gray-400 text-lg md:text-xl leading-relaxed">
-            We designed the system to end the era of randomness. By integrating <span className="text-white">club management</span> and <span className="text-white">player tracking</span> into a single system, we ensure ultra-smooth data flow.
-            </p>
-            <p className="text-gray-400 text-lg md:text-xl leading-relaxed">
-                Using <span className="text-[#46cdcf] font-mono">.unx</span> file technology, we give coaches the ability to export their programs and deliver them instantly to subscribers, which improves the quality of service and player results. 
-            </p>
+            <p className="text-gray-400 text-lg md:text-xl leading-relaxed" dangerouslySetInnerHTML={{ __html: content.p1 }} />
+            <p className="text-gray-400 text-lg md:text-xl leading-relaxed" dangerouslySetInnerHTML={{ __html: content.p2 }} />
           </motion.div>
 
         </div>

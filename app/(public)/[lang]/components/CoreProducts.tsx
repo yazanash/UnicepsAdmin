@@ -1,10 +1,13 @@
-"use client"
+"use client";
 import { motion } from "framer-motion";
 import { PlatformEnum, ProductType } from "@/types/products";
 interface CoreProductsProps {
   products: ProductType[];
+  content: any;
+  lang: string;
 }
-const CoreProducts = ({ products }: CoreProductsProps) => {
+const CoreProducts = ({ products, content, lang }: CoreProductsProps) => {
+  const isAr = lang === "ar";
   return (
     <section className="py-32 px-6 bg-black relative">
       <div className="max-w-7xl mx-auto">
@@ -15,11 +18,10 @@ const CoreProducts = ({ products }: CoreProductsProps) => {
           className="text-center mb-20"
         >
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-            حلولنا الذكية
+            {content.title}
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-            نظام متكامل يغطي كافة جوانب تجربتك الرياضية والإدارية من خلال
-            منتجاتنا المتخصصة.
+            {content.description}
           </p>
         </motion.div>
 
@@ -54,22 +56,25 @@ const CoreProducts = ({ products }: CoreProductsProps) => {
                   index === 1 ? "text-[#46cdcf]" : "text-white"
                 }`}
               >
-                {product.name}
+                {isAr ? product.nameAr : product.name}
               </h3>
 
               <p className="text-gray-400 mb-8 leading-relaxed line-clamp-3">
-                {product.description}
+                {isAr ? product.descriptionAr : product.description}
               </p>
 
               <div className="mt-auto pt-6 border-t border-white/5">
                 <span className="text-xs font-mono text-[#0095A6] block mb-2 uppercase tracking-widest">
-                  Platform: {product.platform}
+                  Platform:{" "}
+                  {product.platform === PlatformEnum.Mobile
+                    ? "Mobile"
+                    : "Desktop"}
                 </span>
                 <a
                   href={`/product/${product.id}`}
                   className="text-white text-sm font-bold flex items-center gap-2 group-hover:gap-4 transition-all"
                 >
-                  إكتشف المزيد <span className="text-[#46cdcf]">→</span>
+                  {content.action} <span className="text-[#46cdcf]">→</span>
                 </a>
               </div>
             </motion.div>

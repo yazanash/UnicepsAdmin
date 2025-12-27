@@ -31,7 +31,7 @@ const PLATFORMS = [
   { label: "Desktop", value: PlatformEnum.Desktop },
   { label: "Web", value: PlatformEnum.Web },
 ];
-
+import { ScrollArea } from "@radix-ui/react-scroll-area";
 interface ProductModalProps {
   product?: ProductType;
   onSaved: (product: ProductType, isEdit: boolean) => void;
@@ -40,11 +40,13 @@ interface ProductModalProps {
 const ProductModal = ({ product, onSaved }: ProductModalProps) => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState(product?.name ?? "");
+   const [nameAr, setNameAr] = useState(product?.nameAr ?? "");
   const [platform, setPlatform] = useState<PlatformEnum>(
     product?.platform ?? PlatformEnum.Desktop
   );
 
   const [description, setDescription] = useState(product?.description ?? "");
+  const [descriptionAr, setDescriptionAr] = useState(product?.descriptionAr ?? "");
   const [appId, setAppId] = useState(product?.appId ?? 0);
 
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -62,6 +64,8 @@ const ProductModal = ({ product, onSaved }: ProductModalProps) => {
   const formData = new FormData();
   formData.append("Name", name);
   formData.append("Description", description);
+  formData.append("NameAr", nameAr);
+  formData.append("DescriptionAr", descriptionAr);
   formData.append("Platform", String(platform));
   formData.append("AppId", String(appId));
   if (imageFile) formData.append("HeroImage", imageFile);
@@ -98,10 +102,11 @@ const ProductModal = ({ product, onSaved }: ProductModalProps) => {
           {product ? "Edit" : "Add Product"}
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-w-2xl max-h-[95vh] flex flex-col p-0 overflow-hidden">
         <DialogHeader>
           <DialogTitle>{product ? "Edit Product" : "Add Product"}</DialogTitle>
         </DialogHeader>
+        <ScrollArea className="flex-1 p-6 pt-2 overflow-y-auto border-y border-white/5">
         <div className="space-y-4">
           <div className="flex flex-col items-center gap-2">
             <Label className="self-start">Product Image</Label>
@@ -122,11 +127,28 @@ const ProductModal = ({ product, onSaved }: ProductModalProps) => {
               onChange={(e) => setName(e.target.value)}
             />
           </div>
+           <div>
+            <Label>Arabic Name</Label>
+            <Input
+              type="text"
+              value={nameAr}
+              onChange={(e) => setNameAr(e.target.value)}
+            />
+          </div>
           <div>
             <Label>Description</Label>
             <Textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              placeholder="اكتب وصف المنتج"
+              rows={4}
+            />
+          </div>
+           <div>
+            <Label>Arabic Description</Label>
+            <Textarea
+              value={descriptionAr}
+              onChange={(e) => setDescriptionAr(e.target.value)}
               placeholder="اكتب وصف المنتج"
               rows={4}
             />
@@ -159,6 +181,7 @@ const ProductModal = ({ product, onSaved }: ProductModalProps) => {
             />
           </div>
         </div>
+        </ScrollArea>
         <DialogFooter>
           <Button onClick={handleSave}>Save</Button>
         </DialogFooter>

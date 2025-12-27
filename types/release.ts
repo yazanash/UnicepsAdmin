@@ -36,6 +36,7 @@ export interface ReleaseType{
     targetOS:TargetOSEnum;
     downloadSource:DownloadSourceEnum;
     changeLog:string;
+    changeLogAr:string;
     productId:number;
     downloadUrl:string;
 }

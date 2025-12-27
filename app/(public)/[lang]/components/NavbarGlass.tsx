@@ -2,8 +2,17 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-const NavbarGlass = () => {
+import { usePathname } from "next/navigation";
+
+const NavbarGlass = ({ dict, lang }: { dict: any; lang: string }) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const redirectedPathname = (locale: string) => {
+    if (!pathname) return "/";
+    const segments = pathname.split("/");
+    segments[1] = locale;
+    return segments.join("/");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,7 +36,8 @@ const NavbarGlass = () => {
     `}
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <div className="flex flex-row items-center">
+        <div >
+          <Link href="/" className="flex flex-row items-center">
           <Image
             src="/Logo/Uni-Logo.png"
             alt="Uniceps logo"
@@ -35,18 +45,25 @@ const NavbarGlass = () => {
             height={50}
           />
           <span className="text-white font-bold text-xl mx-1">Uniceps</span>
+          </Link>
         </div>
-        <Link href="/admin">
-          <button
-            className="
-          px-4 py-2 rounded-xl
-         border border-gray-400
-          text-white
-        "
+        <div className="flex items-center gap-4">
+          <Link
+            href={redirectedPathname(lang === "en" ? "ar" : "en")}
+            className="text-white/70 hover:text-white text-sm font-medium border border-white/10 px-3 py-1 rounded-lg transition-colors"
           >
-            Admin Dashboard
-          </button>
-        </Link>
+            {lang === "en" ? "العربية" : "English"}
+          </Link>
+          <Link href="/admin">
+            <button
+              className="
+       text-white/70 hover:text-white text-sm font-medium border border-white/10 px-3 py-1 rounded-lg transition-colors
+        "
+            >
+             {dict.adminDashboard}
+            </button>
+          </Link>
+        </div>
       </div>
     </nav>
   );

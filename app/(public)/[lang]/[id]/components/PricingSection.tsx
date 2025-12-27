@@ -1,7 +1,11 @@
 import { Plan } from "@/types/plans";
 import { Check, ShieldCheck } from "lucide-react";
-
-export default function PricingSection({ pricingPlans }: { pricingPlans: Plan[] }) {
+interface PricingProps {
+  pricingPlans: Plan[];
+  lang: string;
+  dict: any; // نمرر dict.pricing من الصفحة الأب
+}
+export default function PricingSection({ pricingPlans, lang, dict }: PricingProps) {
   return (
     <section className="py-24 px-6 relative overflow-hidden">
       {/* إضاءة خلفية خفيفة خلف الكروت */}
@@ -9,9 +13,9 @@ export default function PricingSection({ pricingPlans }: { pricingPlans: Plan[] 
 
       <div className=" mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">خيارات الاشتراك</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">{dict.pricingTitle}</h2>
           <p className="text-gray-500 max-w-2xl mx-auto">
-            نوفر أنظمة مرنة تتناسب مع حجم عملك، استكشف الخيارات المتاحة لكل باقة
+           {dict.pricingDesc}
           </p>
         </div>
 
@@ -27,9 +31,9 @@ export default function PricingSection({ pricingPlans }: { pricingPlans: Plan[] 
               </div>
 
               <h3 className="text-3xl font-black text-white mb-2">{plan.name}</h3>
-              <p className="text-[#46cdcf] text-sm tracking-[0.2em] uppercase mb-10 font-medium">الخيارات المتاحة لهذه الباقة</p>
+              <p className="text-[#46cdcf] text-sm tracking-[0.2em] uppercase mb-10 font-medium">{dict.availableOptions}</p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {plan.planItems.map((item) => (
                   <div 
                     key={item.id} 
@@ -40,7 +44,7 @@ export default function PricingSection({ pricingPlans }: { pricingPlans: Plan[] 
                     </span>
                     <span className="text-3xl font-black text-white">
                       {item.isFree ? (
-                        <span className="text-transparent bg-clip-text bg-linear-to-r from-[#46cdcf] to-white">Free</span>
+                        <span className="text-transparent bg-clip-text bg-linear-to-r from-[#46cdcf] to-white">{dict.free}</span>
                       ) : (
                         `$${item.price}`
                       )}
@@ -53,11 +57,11 @@ export default function PricingSection({ pricingPlans }: { pricingPlans: Plan[] 
               <div className="mt-10 pt-8 border-t border-white/10 flex flex-wrap gap-6">
                 <div className="flex items-center gap-2 text-sm text-gray-500 font-medium">
                   <Check size={16} className="text-[#46cdcf]" />
-                  دخول كامل للميزات
+                 {dict.featureFullAccess}
                 </div>
                 <div className="flex items-center gap-2 text-sm text-gray-500 font-medium">
                   <Check size={16} className="text-[#46cdcf]" />
-                  تحديثات تلقائية
+                 {dict.featureUpdates}
                 </div>
               </div>
             </div>

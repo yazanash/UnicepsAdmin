@@ -13,8 +13,10 @@ import { ProductType } from "@/types/products";
 interface HeroSliderProps {
   onSlideChange: (index: number) => void;
   products : ProductType[]
+    lang:string;
+  buttonText:string;
 }
-const HeroSlider = ({ onSlideChange,products }: HeroSliderProps) => {
+const HeroSlider = ({ onSlideChange,products,lang,buttonText }: HeroSliderProps) => {
   return (
     <div className="relative z-10 w-full h-full mx-auto">
       <Swiper
@@ -38,6 +40,8 @@ const HeroSlider = ({ onSlideChange,products }: HeroSliderProps) => {
             {/* نمرر بيانات المنتج الواحد لكل كرت */}
             <GlassCard 
                product={product} 
+               lang={lang}
+               buttonText={buttonText}
                reverse={index % 2 !== 0} 
             />
           </SwiperSlide>

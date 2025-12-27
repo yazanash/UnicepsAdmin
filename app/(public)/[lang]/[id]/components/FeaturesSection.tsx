@@ -3,8 +3,10 @@ import { ChartAreaIcon } from "lucide-react";
 import { FeatureType } from "@/types/productFeature";
 interface FeatureProps {
   feature: FeatureType;
+  lang:string
 }
-const FeaturesSection = ({ feature }: FeatureProps) => {
+const FeaturesSection = ({ feature,lang }: FeatureProps) => {
+  const isAr = lang === "ar";
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -16,10 +18,10 @@ const FeaturesSection = ({ feature }: FeatureProps) => {
         <ChartAreaIcon className="text-white" />
       </div> */}
       <h3 className="text-xl font-bold text-white mb-4 group-hover:text-[#46cdcf] transition-colors">
-        {feature.title}
+       {isAr ? feature.titleAr : feature.title}
       </h3>
       <p className="text-gray-400 text-sm leading-relaxed">
-        {feature.description}
+       {isAr ? feature.descriptionAr : feature.description}
       </p>
     </motion.div>
   );

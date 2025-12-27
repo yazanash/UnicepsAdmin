@@ -3,5 +3,7 @@ export interface UserStepType{
     stepNumber:number;
     title:string;
     description:string;
+    titleAr:string;
+    descriptionAr:string;
     productId:number;
 }

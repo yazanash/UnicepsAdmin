@@ -23,6 +23,8 @@ const FAQsModal = ({ productId, faq, onSave }: UserStepModalProps) => {
   const [newItem, setItem] = useState<Partial<FAQsType>>({
     question: "",
     answer: "",
+    questionAr: "",
+    answerAr: "",
     productId,
   });
   const [open, setOpen] = useState(false);
@@ -31,7 +33,13 @@ const FAQsModal = ({ productId, faq, onSave }: UserStepModalProps) => {
     if (faq) {
       setItem(faq);
     } else {
-      setItem({ question: "", answer: "", productId });
+      setItem({
+        question: "",
+        answer: "",
+        questionAr: "",
+        answerAr: "",
+        productId,
+      });
     }
   }, [faq, open]);
   const handleAdd = () => {
@@ -41,11 +49,19 @@ const FAQsModal = ({ productId, faq, onSave }: UserStepModalProps) => {
     setItem({
       question: "",
       answer: "",
+      questionAr: "",
+      answerAr: "",
       productId,
     });
     setOpen(false);
     if (!isEdit) {
-      setItem({ question: "", answer: "", productId });
+      setItem({
+        question: "",
+        answer: "",
+        questionAr: "",
+        answerAr: "",
+        productId,
+      });
     }
   };
   return (
@@ -73,11 +89,28 @@ const FAQsModal = ({ productId, faq, onSave }: UserStepModalProps) => {
               }
             />
           </div>
+          <div>
+            <Label>Arabic Question</Label>
+            <Input
+              value={newItem.questionAr || ""}
+              onChange={(e) =>
+                setItem({ ...newItem, questionAr: e.target.value })
+              }
+            />
+          </div>
           <div className="col-span-3 space-y-2">
             <Label>Answer</Label>
             <Textarea
               value={newItem.answer || ""}
               onChange={(e) => setItem({ ...newItem, answer: e.target.value })}
+              rows={4}
+            />
+          </div>
+          <div className="col-span-3 space-y-2">
+            <Label>Arabic Answer</Label>
+            <Textarea
+              value={newItem.answerAr || ""}
+              onChange={(e) => setItem({ ...newItem, answerAr: e.target.value })}
               rows={4}
             />
           </div>
