@@ -66,7 +66,7 @@
     "productsTitle": "Products",
     "products": ["Mobile App", "Desktop Admin Version", ".unx File System"],
     "supportTitle": "Support & Help",
-    "supportLinks": ["FAQ", "Privacy Policy"],
+    "supportLinks": [ { "name":"Privacy Policy","url":"/privacy"},{"name": "Terms & Conditions","url":"/terms"}], 
     "helpText": "Need help?",
     "socialTitle": "Stay Connected",
     "socialDesc": "Follow us on social media platforms to stay updated with the latest updates.",
