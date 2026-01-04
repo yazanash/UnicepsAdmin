@@ -62,7 +62,7 @@ const TermsOfService = () => {
 
           {/* 4. Data Syncing */}
           <section className="bg-[#111] p-6 rounded-2xl border border-white/5">
-            <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-3 italic uppercase tracking-tighter text-cyan-500">
+            <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-3 italic uppercase tracking-tighter">
                04. Data Syncing & API
             </h2>
             <p>

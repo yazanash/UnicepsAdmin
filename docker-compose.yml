@@ -1,0 +1,9 @@
+services:
+  uniceps_frontend:
+    build: .
+    container_name: uniceps_site
+    restart: always
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.production
