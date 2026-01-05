@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
       },
        {
         protocol: 'https',
-        hostname: 'unipi.trio-verse.com',
+        hostname: 'uniapi.trio-verse.com',
         port: '',
         pathname: '/uploads/**', // السماح بجميع الصور داخل مجلد uploads
       },
