@@ -27,7 +27,7 @@ export default function NewPlanPage() {
       console.log("Plan created:", createdPlan);
 
       // بعد النجاح، رجع المستخدم لصفحة إدارة الـ plan الجديدة
-      router.push(`/admin/proucts/${productId}/plans/${createdPlan.id}`);
+      router.push(`/admin/products/${productId}/plans/${createdPlan.id}`);
     } catch (err) {
       console.error("Error creating plan", err);
       alert("Failed to create plan. Please try again.");

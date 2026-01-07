@@ -9,13 +9,13 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'uniceps.runasp.net',
         port: '',
-        pathname: '/uploads/**', // السماح بجميع الصور داخل مجلد uploads
+        pathname: '/uploads/**', 
       },
        {
         protocol: 'https',
         hostname: 'uniapi.trio-verse.com',
         port: '',
-        pathname: '/uploads/**', // السماح بجميع الصور داخل مجلد uploads
+        pathname: '/uploads/**',
       },
     ],
   },

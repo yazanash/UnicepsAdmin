@@ -41,7 +41,6 @@ const ReleasesTable = ({ productId, releases }: ReleaseProps) => {
                 <TableHead>Version</TableHead>
                 <TableHead>Target OS</TableHead>
                 <TableHead>Download Source</TableHead>
-                <TableHead>Download Url</TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -54,8 +53,15 @@ const ReleasesTable = ({ productId, releases }: ReleaseProps) => {
                   <TableCell>
                     {DownloadSource_REVERSE[req.downloadSource]}
                   </TableCell>
-                  <TableCell>{req.downloadUrl}</TableCell>
-                  <TableCell></TableCell>
+                  <TableCell>
+                    <Link
+                      href={`/admin/products/${productId}/releases/${req.id}`}
+                    >
+                      <Button variant="outline" size="sm">
+                        Edit
+                      </Button>
+                    </Link>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

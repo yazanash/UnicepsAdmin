@@ -6,7 +6,7 @@ import {
   HandCoins,
   Settings,
   DollarSignIcon,
-  UploadIcon,
+  SubscriptIcon,
 } from "lucide-react";
 import {
   Sidebar,
@@ -35,6 +35,11 @@ const items = [
     icon: PackageOpenIcon,
   },
   {
+    title: "Subscriptions",
+    url: "/admin/subscriptions",
+    icon: BadgeDollarSign,
+  },
+  {
     title: "Cash Requests",
     url: "/admin/cash-requests",
     icon: HandCoins,
@@ -56,17 +61,16 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarHeader>
         <div>
-          <Link href='/'  className="flex flex-row items-center">
-          <Image
-            src="/Logo/Uni-Logo.png"
-            alt="Uniceps logo"
-            width={40}
-            height={40}
-            className="mr-2"
-          ></Image>
-          <div>Uniceps - Admin</div>
+          <Link href="/" className="flex flex-row items-center">
+            <Image
+              src="/Logo/Uni-Logo.png"
+              alt="Uniceps logo"
+              width={40}
+              height={40}
+              className="mr-2"
+            ></Image>
+            <div>Uniceps - Admin</div>
           </Link>
-
         </div>
       </SidebarHeader>
       <SidebarContent>

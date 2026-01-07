@@ -56,18 +56,16 @@ const ProductPage = ({
         dict={langDict}
       />
 
-      {/* قسم الأسئلة الشائعة */}
       <FAQSection
         faqs={data.faQs}
         lang={lang}
         dict={{
-          badge: langDict.faqBadge, // "الأسئلة الشائعة"
-          title: langDict.faqTitle, // أو أضفها في الـ JSON
+          badge: langDict.faqBadge, 
+          title: langDict.faqTitle,
         }}
       />
 
-      {/* بار التحميل العائم */}
-      <DownloadBar releases={data.latestReleases} />
+      <DownloadBar  lang={lang} releases={data.latestReleases} />
     </div>
   );
 };
