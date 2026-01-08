@@ -38,7 +38,7 @@ export default function NewReleasePage() {
   const router = useRouter();
 
   const [version, setVersion] = useState("");
-  const [downloadUrl, setDownloadUrl] = useState("");
+  const [downloadUrl, setdownloadUrl] = useState("");
   const [targetOS, setTargetOS] = useState(TargetOSEnum.Windows);
   const [downloadSource, setDownloadSource] = useState(
     DownloadSourceEnum.Website
@@ -53,8 +53,6 @@ export default function NewReleasePage() {
     const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
     let uploadedBytes = 0;
     let downloadUrl = "";
-    console.log("file uploaded");
-    console.log(totalChunks);
     for (let i = 0; i < totalChunks; i++) {
       const start = i * CHUNK_SIZE;
       const end = Math.min(start + CHUNK_SIZE, file.size);
@@ -68,34 +66,39 @@ export default function NewReleasePage() {
       const res = await api.post(`/Release/upload-chunk`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
+      console.log(res);
       if (res.data.downloadUrl) {
-        downloadUrl = res.data.DownloadUrl;
+        downloadUrl = res.data.downloadUrl;
+        console.log(downloadUrl);
       }
 
       uploadedBytes += chunk.size;
       setProgress(Math.round((uploadedBytes / file.size) * 100));
     }
-
     return downloadUrl;
   };
 
   const handleSave = async () => {
+    let finalDownloadUrl = downloadUrl;
+
     if (file) {
+      console.log("Uploading file...");
       const fileUrl = await uploadFileInChunks(file);
-      setDownloadUrl(fileUrl);
+      console.log("File uploaded, URL:", fileUrl);
+
+      // تحديث الـ State للعرض فقط في الواجهة (UI)
+      setdownloadUrl(fileUrl);
+
+      finalDownloadUrl = fileUrl;
+    }
+
+    if (!finalDownloadUrl) {
+      alert("Please upload a file or provide a download URL");
+      return;
     }
 
     // 1. رفع الملف بالـ chunks
 
-    console.log({
-      productId,
-      version,
-      targetOS,
-      downloadSource,
-      changeLog,
-      changeLogAr,
-      downloadUrl,
-    });
     // 2. إنشاء الـ Release
     await api.post(`/Release/upload`, {
       productId,
@@ -104,7 +107,7 @@ export default function NewReleasePage() {
       downloadSource,
       changeLog,
       changeLogAr,
-      downloadUrl,
+      downloadUrl: finalDownloadUrl,
     });
 
     router.push(`/admin/products/${productId}/releases`);
@@ -182,7 +185,7 @@ export default function NewReleasePage() {
           <Input
             type="url"
             value={downloadUrl}
-            onChange={(e) => setDownloadUrl(e.target.value)}
+            onChange={(e) => setdownloadUrl(e.target.value)}
           />
         </div>
         <div className="space-y-2">
