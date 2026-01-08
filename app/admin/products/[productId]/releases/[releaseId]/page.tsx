@@ -83,7 +83,7 @@ export default function NewReleasePage() {
         headers: { "Content-Type": "multipart/form-data" },
       });
       if (res.data.downloadUrl) {
-        downloadUrl = res.data.DownloadUrl;
+        downloadUrl = res.data.downloadUrl;
       }
 
       uploadedBytes += chunk.size;
