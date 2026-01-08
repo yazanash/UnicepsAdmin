@@ -44,6 +44,7 @@ export default function NewReleasePage() {
     DownloadSourceEnum.Website
   );
   const [changeLog, setChangeLog] = useState("");
+  const [changeLogAr, setChangeLogAr] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [progress, setProgress] = useState(0);
 
@@ -68,7 +69,7 @@ export default function NewReleasePage() {
         headers: { "Content-Type": "multipart/form-data" },
       });
       if (res.data.downloadUrl) {
-        downloadUrl = res.data.downloadUrl;
+        downloadUrl = res.data.DownloadUrl;
       }
 
       uploadedBytes += chunk.size;
@@ -79,20 +80,21 @@ export default function NewReleasePage() {
   };
 
   const handleSave = async () => {
-    if (file){
-        const fileUrl = await uploadFileInChunks(file);
-        setDownloadUrl(fileUrl);
+    if (file) {
+      const fileUrl = await uploadFileInChunks(file);
+      setDownloadUrl(fileUrl);
     }
 
     // 1. رفع الملف بالـ chunks
-    
-      console.log( {
+
+    console.log({
       productId,
       version,
       targetOS,
       downloadSource,
       changeLog,
-      downloadUrl
+      changeLogAr,
+      downloadUrl,
     });
     // 2. إنشاء الـ Release
     await api.post(`/Release/upload`, {
@@ -101,7 +103,8 @@ export default function NewReleasePage() {
       targetOS,
       downloadSource,
       changeLog,
-      downloadUrl
+      changeLogAr,
+      downloadUrl,
     });
 
     router.push(`/admin/products/${productId}/releases`);
@@ -113,7 +116,7 @@ export default function NewReleasePage() {
         Add Release for Product {productId}
       </h1>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div className=" space-y-2">
           <Label>Version</Label>
           <Input value={version} onChange={(e) => setVersion(e.target.value)} />
@@ -166,6 +169,14 @@ export default function NewReleasePage() {
             rows={4}
           />
         </div>
+        <div className="col-span-3 space-y-2">
+          <Label>ChangeLog Arabic</Label>
+          <Textarea
+            value={changeLogAr}
+            onChange={(e) => setChangeLogAr(e.target.value)}
+            rows={4}
+          />
+        </div>
         <div className=" space-y-2">
           <Label>DownloadUrl</Label>
           <Input
@@ -183,7 +194,7 @@ export default function NewReleasePage() {
         </div>
 
         {progress > 0 && (
-          <div className="w-full bg-gray-200 rounded">
+          <div className="col-span-3 w-full bg-gray-200 rounded">
             <div
               className="bg-blue-500 text-white text-xs leading-none py-1 text-center rounded"
               style={{ width: `${progress}%` }}

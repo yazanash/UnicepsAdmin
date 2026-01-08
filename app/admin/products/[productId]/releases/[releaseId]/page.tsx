@@ -46,6 +46,7 @@ export default function NewReleasePage() {
     DownloadSourceEnum.Website
   );
   const [changeLog, setChangeLog] = useState("");
+  const [changeLogAr, setChangeLogAr] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [progress, setProgress] = useState(0);
 
@@ -58,6 +59,7 @@ export default function NewReleasePage() {
       setTargetOS(data.targetOS);
       setDownloadSource(data.downloadSource);
       setChangeLog(data.changeLog);
+      setChangeLogAr(data.changeLogAr);
     });
   }, [releaseId]);
 
@@ -81,7 +83,7 @@ export default function NewReleasePage() {
         headers: { "Content-Type": "multipart/form-data" },
       });
       if (res.data.downloadUrl) {
-        downloadUrl = res.data.downloadUrl;
+        downloadUrl = res.data.DownloadUrl;
       }
 
       uploadedBytes += chunk.size;
@@ -105,6 +107,7 @@ export default function NewReleasePage() {
       targetOS,
       downloadSource,
       changeLog,
+      changeLogAr,
       downloadUrl: finalDownloadUrl,
     };
 
@@ -169,6 +172,14 @@ export default function NewReleasePage() {
           <Textarea
             value={changeLog}
             onChange={(e) => setChangeLog(e.target.value)}
+            rows={4}
+          />
+        </div>
+        <div className="col-span-3 space-y-2">
+          <Label>ChangeLog Arabic</Label>
+          <Textarea
+            value={changeLogAr}
+            onChange={(e) => setChangeLogAr(e.target.value)}
             rows={4}
           />
         </div>
