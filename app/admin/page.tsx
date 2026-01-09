@@ -1,5 +1,13 @@
 "use client";
-import { Users, DollarSign, ClipboardList, BarChart, DownloadIcon,DollarSignIcon,Package } from "lucide-react";
+import {
+  Users,
+  DollarSign,
+  ClipboardList,
+  BarChart,
+  DownloadIcon,
+  DollarSignIcon,
+  Package,
+} from "lucide-react";
 import StatCard from "./components/StatCard";
 import HomeChart from "./components/HomeChart";
 import { DashboardStats } from "@/types/dashboard";
@@ -29,11 +37,18 @@ const Admin = () => {
   const stats = [
     { title: "Total Users", value: data.usersCount, icon: Users },
     { title: "Active Users (30d)", value: data.activeUsers, icon: BarChart },
-    { title: "Total Downloads", value: data.totalDownloads, icon: DownloadIcon },
-    { title: "Unpaid Subscription", value: data.unpaidSubscriptionCount, icon: DollarSignIcon },
+    {
+      title: "Total Downloads",
+      value: data.totalDownloads,
+      icon: DownloadIcon,
+    },
+    {
+      title: "Unpaid Subscription",
+      value: data.unpaidSubscriptionCount,
+      icon: DollarSignIcon,
+    },
     { title: "Revenue", value: data.revenue, icon: DollarSign },
     { title: "Cash Requests", value: data.cashRequests, icon: ClipboardList },
-  
   ];
 
   return (
@@ -48,14 +63,17 @@ const Admin = () => {
           />
         ))}
       </div>
-      <div className="bg-white p-6 rounded-lg shadow">
+      <div className="p-6 rounded-lg border ">
         <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
           <Package className="w-5 h-5" /> Subscriptions per Product
         </h3>
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {data.subscriptionsByProduct.map((prod) => (
-            <div key={prod.productName} className="border p-3 rounded-md text-center">
-              <p className="text-sm text-gray-500">{prod.productName}</p>
+            <div
+              key={prod.productName}
+              className="border p-3 rounded-md text-center"
+            >
+              <p className="text-base">{prod.productName}</p>
               <p className="text-xl font-bold">{prod.count}</p>
             </div>
           ))}
