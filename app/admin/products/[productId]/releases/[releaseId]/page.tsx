@@ -78,7 +78,8 @@ export default function NewReleasePage() {
       formData.append("ChunkIndex", String(i));
       formData.append("TotalChunks", String(totalChunks));
       formData.append("Chunk", chunk);
-
+      formData.append("FileName", file.name);
+      
       const res = await api.post(`/Release/upload-chunk`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });

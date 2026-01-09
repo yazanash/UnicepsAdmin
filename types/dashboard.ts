@@ -1,9 +1,11 @@
 export interface MonthlyNewUsers {
   month: string;
-  normalUsers: number;
-  businessUsers: number;
+  users: number;
 }
-
+export interface SubscriptionsByProduct {
+  productName: string;
+  count: number;
+}
 export interface ActiveSubscriptions {
   month: string;
   active: number;
@@ -16,10 +18,12 @@ export interface TrainingSessions {
 
 export interface DashboardStats {
   usersCount: number;
-  totalBusinessUsers: number;
+  activeUsers: number;
+  totalDownloads: number;
+  unpaidSubscriptionCount: number;
   revenue: number;
   cashRequests: number;
-  activeUsers: number;
+  subscriptionsByProduct: SubscriptionsByProduct[];
   monthlyNewUsers: MonthlyNewUsers[];
   activeSubscriptions: ActiveSubscriptions[];
   trainingSessions: TrainingSessions[];
