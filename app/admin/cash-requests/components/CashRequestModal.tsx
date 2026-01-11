@@ -31,6 +31,10 @@ const CashRequestModal = ({
     onDecline(request.id);
     setOpen(false);
   };
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+    const imageSrc = request.imageUrl
+    ? `${BASE_URL}${request.imageUrl}`
+    : "/placeholder-app.png";
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -57,7 +61,20 @@ const CashRequestModal = ({
           <p>
             <strong>Amount:</strong> {request.amount}
           </p>
-          {/* {request.imageUrl && <img src={request.imageUrl} alt="Receipt" className="rounded-md" />} */}
+        <div className="relative group">
+     <p className="text-sm font-bold mb-1">Receipt Image:</p>
+     <div className="max-h-75 overflow-y-auto border rounded-md bg-muted/30">
+        <img 
+          src={imageSrc} 
+          alt="Receipt" 
+          className="w-full h-auto object-contain cursor-zoom-in" 
+          onClick={() => window.open(imageSrc, '_blank')}
+        />
+     </div>
+     <span className="text-[10px] text-muted-foreground mt-1 block">
+        * انقر على الصورة لفتحها بالحجم الكامل
+     </span>
+  </div>
         </div>
         <DialogFooter className="flex gap-2">
           <Button variant="default" onClick={handleAccept}>

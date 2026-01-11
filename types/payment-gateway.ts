@@ -3,4 +3,5 @@ export interface PaymentGateway{
     name: string;
     transferInfo: string;
     isActive: boolean;
+    qrCodeUrl:string;
 }

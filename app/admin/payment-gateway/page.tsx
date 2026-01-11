@@ -17,10 +17,10 @@ const PaymentGatewayPage = () => {
           console.error("Error fetching plan", err);
           setLoading(false);
         });
-    });
+    },[]);
   
     if (loading) return <div>جاري التحميل...</div>;
-    if (!gateways) return <div>الخطة غير موجودة.</div>;
+    if (!gateways) return <div>لا يوجد بوابات دفع بعد.</div>;
   return (
     <PaymentGatewayTable gateways={gateways}/>
   )
