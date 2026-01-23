@@ -6,7 +6,7 @@ const locales = ["en", "ar"];
 // مثال: استدعاء المنتجات من API
 async function fetchProducts() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/Products`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/Product`);
     if (!res.ok) return [];
     const data = await res.json();
     return data.map((p: any) => p.id);
