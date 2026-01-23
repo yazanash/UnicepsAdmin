@@ -9,13 +9,15 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get('auth')?.value
 
   // 2. تجاهل الملفات الثابتة والـ API والـ Auth من منطق اللغات
-  if (
+ if (
     pathname.startsWith('/api') ||
-     pathname.startsWith('/admin') ||
-    pathname.startsWith('/auth') || // منع إضافة لغة لروابط auth
+    pathname.startsWith('/admin') ||
+    pathname.startsWith('/auth') ||
     [
       '/manifest.json',
       '/favicon.ico',
+      '/robots.txt',      // <<< أضفنا robots.txt
+      '/sitemap.xml',     // <<< أضفنا sitemap.xml
     ].includes(pathname) ||
     pathname.match(/\.(jpg|jpeg|png|gif|svg)$/)
   ) {
