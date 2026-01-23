@@ -15,6 +15,37 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Uniceps - Smart Management System",
   description: "The official management platform for Uniceps organizations",
+  verification: {
+    google: "dzl1melVzoDh7oLqAxXrWwu3y4YLdUCSsOjB87dIPyo",
+  },
+  alternates: {
+    canonical: "https://uniceps.trio-verse.com",
+  },
+
+  openGraph: {
+    title: "Uniceps - Smart Management System",
+    description:
+      "All-in-one gym management system for fitness clubs, coaches, and athletes. Offline-first, desktop and mobile ready.",
+    url: "https://uniceps.trio-verse.com",
+    siteName: "Uniceps",
+    images: [
+      {
+        url: "https://uniceps.trio-verse.com/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Uniceps Fitness Management System",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Uniceps - Smart Management System",
+    description:
+      "Manage gyms, athletes, workouts, nutrition plans, and subscriptions with Uniceps.",
+    images: ["https://uniceps.trio-verse.com/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({
