@@ -12,7 +12,7 @@ export async function generateMetadata({
 }: {
   params: { id: string; lang: Locale };
 }): Promise<Metadata> {
-  const { id, lang } = params;
+  const { id, lang } = await params; 
   const data: ProductLandingData = await apiServerGet(`/ProductLanding/${id}`);
   const isAr = lang === "ar";
 
