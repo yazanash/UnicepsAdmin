@@ -55,14 +55,14 @@ export async function generateMetadata({
 const ProductLandingPage = async ({
   params,
 }: {
-  params: Promise<{ id: string; lang: Locale }>;
+  params: Promise<{ slug: string; lang: Locale }>;
 }) => {
-  const { id, lang } = await params;
+  const { slug, lang } = await params;
   const dict = await getDictionary(lang);
-  const data: ProductLandingData = await apiServerGet(`/ProductLanding/${id}`);
+  const data: ProductLandingData = await apiServerGet(`/ProductLanding/${slug}`);
   if (!data) return <div>Product Not Found</div>;
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-  const productUrl = `https://uniceps.trio-verse.com/${lang}/${id}`;
+  const productUrl = `https://uniceps.trio-verse.com/${lang}/${slug}`;
   const imageSrc = data.product.heroImage
     ? `${BASE_URL}${data.product.heroImage}`
     : `${BASE_URL}/placeholder-app.png`;
