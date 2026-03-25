@@ -53,7 +53,7 @@ const GlassCard = ({
           </p>
         </div>
           {showButton&& <div className=" w-full flex justify-center">
-          <Link href={`/${product.id}`}>
+          <Link href={`/${product.slug}`}>
             <button className="px-8 py-4 rounded-2xl bg-linear-to-r from-[#0095A6] to-[#46cdcf] hover:shadow-[0_0_20px_rgba(0,149,166,0.4)] text-white font-bold transition-all duration-300">
               {buttonText}
             </button>

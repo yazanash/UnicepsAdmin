@@ -20,5 +20,6 @@ export interface ProductType{
     descriptionAr:string;
     heroImage: string,
     appId: number
+    slug:string;
 }
 

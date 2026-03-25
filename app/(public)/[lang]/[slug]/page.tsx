@@ -10,17 +10,25 @@ import ProductSEO from "./components/ProductSEO";
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string; lang: Locale };
+  params: { slug: string; lang: Locale };
 }): Promise<Metadata> {
-  const { id, lang } = await params; 
-  const data: ProductLandingData = await apiServerGet(`/ProductLanding/${id}`);
+  const { slug, lang } = await params;
+  const data: ProductLandingData = await apiServerGet(
+    `/ProductLanding/${slug}`,
+  );
   const isAr = lang === "ar";
 
-  if (!data) return { title: "Product Not Found", description: "This product does not exist." };
+  if (!data)
+    return {
+      title: "Product Not Found",
+      description: "This product does not exist.",
+    };
 
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-  const productUrl = `https://uniceps.trio-verse.com/${lang}/${id}`;
-  const imageSrc = data.product.heroImage ? `${BASE_URL}${data.product.heroImage}` : `${BASE_URL}/placeholder-app.png`;
+  const productUrl = `https://uniceps.trio-verse.com/${lang}/${slug}`;
+  const imageSrc = data.product.heroImage
+    ? `${BASE_URL}${data.product.heroImage}`
+    : `${BASE_URL}/placeholder-app.png`;
 
   return {
     title: isAr ? data.product.nameAr : data.product.name,
@@ -29,7 +37,9 @@ export async function generateMetadata({
       title: isAr ? data.product.nameAr : data.product.name,
       description: isAr ? data.product.descriptionAr : data.product.description,
       url: productUrl,
-      images: [{ url: imageSrc, alt: isAr ? data.product.nameAr : data.product.name }],
+      images: [
+        { url: imageSrc, alt: isAr ? data.product.nameAr : data.product.name },
+      ],
     },
     twitter: {
       card: "summary_large_image",
@@ -51,35 +61,40 @@ const ProductLandingPage = async ({
   const dict = await getDictionary(lang);
   const data: ProductLandingData = await apiServerGet(`/ProductLanding/${id}`);
   if (!data) return <div>Product Not Found</div>;
-   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
   const productUrl = `https://uniceps.trio-verse.com/${lang}/${id}`;
-  const imageSrc = data.product.heroImage ? `${BASE_URL}${data.product.heroImage}` : `${BASE_URL}/placeholder-app.png`;
+  const imageSrc = data.product.heroImage
+    ? `${BASE_URL}${data.product.heroImage}`
+    : `${BASE_URL}/placeholder-app.png`;
   const isAr = lang === "ar";
 
   const productJSONLD = {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": isAr ? data.product.nameAr : data.product.name,
-    "description": isAr ? data.product.descriptionAr : data.product.description,
-    "image": [imageSrc],
-    "sku": data.product.id,
-    "offers": data.pricingPlans.map(plan => ({
+    name: isAr ? data.product.nameAr : data.product.name,
+    description: isAr ? data.product.descriptionAr : data.product.description,
+    image: [imageSrc],
+    sku: data.product.id,
+    offers: data.pricingPlans.map((plan) => ({
       "@type": "Offer",
-      "price": plan.planItems[0]?.price ?? 0,
-      "priceCurrency": "USD",
-      "url": productUrl,
-      "availability": "https://schema.org/InStock"
-    }))
+      price: plan.planItems[0]?.price ?? 0,
+      priceCurrency: "USD",
+      url: productUrl,
+      availability: "https://schema.org/InStock",
+    })),
   };
 
   const faqJSONLD = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": data.faQs.map(faq => ({
+    mainEntity: data.faQs.map((faq) => ({
       "@type": "Question",
-      "name": isAr ? faq.questionAr : faq.question,
-      "acceptedAnswer": { "@type": "Answer", "text": isAr ? faq.answerAr : faq.answer }
-    }))
+      name: isAr ? faq.questionAr : faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: isAr ? faq.answerAr : faq.answer,
+      },
+    })),
   };
 
   return (
