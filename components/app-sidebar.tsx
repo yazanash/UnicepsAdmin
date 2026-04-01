@@ -23,6 +23,7 @@ import {
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import Image from "next/image";
 import Link from "next/link";
+import { FaFileInvoice } from "react-icons/fa";
 const items = [
   {
     title: "Home",
@@ -32,7 +33,7 @@ const items = [
   {
     title: "Licenses",
     url: "/admin/licenses",
-    icon: PackageOpenIcon,
+    icon: FaFileInvoice,
   },
   {
     title: "Products",
