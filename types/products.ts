@@ -10,16 +10,23 @@ export const PLATFORM_MAP_REVERSE: Record<PlatformEnum, string> = {
   [PlatformEnum.Web]: "Web",
 };
 
-
-export interface ProductType{
-    id: number,
-    name: string,
-    platform: PlatformEnum,
-    description: string,
-    nameAr:string;
-    descriptionAr:string;
-    heroImage: string,
-    appId: number
-    slug:string;
+export interface ProductType {
+  id: number;
+  name: string;
+  platform: PlatformEnum;
+  description: string;
+  nameAr: string;
+  descriptionAr: string;
+  heroImage: string;
+  appId: number;
+  slug: string;
 }
 
+export interface LicenseType {
+  id: string;
+  productId: number;
+  customerName: string;
+  type: number;
+  expireDate: string;
+  maxDevices: number;
+}

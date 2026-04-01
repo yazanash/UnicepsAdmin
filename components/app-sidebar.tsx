@@ -30,6 +30,11 @@ const items = [
     icon: Home,
   },
   {
+    title: "Licenses",
+    url: "/admin/licenses",
+    icon: PackageOpenIcon,
+  },
+  {
     title: "Products",
     url: "/admin/products",
     icon: PackageOpenIcon,
