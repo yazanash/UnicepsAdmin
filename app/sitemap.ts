@@ -39,9 +39,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
 
     // الصفحات الديناميكية لكل لغة
-    products.forEach((id:any) => {
+    products.forEach((slug: any) => {
       urls.push({
-        url: `https://uniceps.trio-verse.com/${locale}/${id}`,
+        url: `https://uniceps.trio-verse.com/${locale}/${slug}`,
         lastModified: new Date(),
       });
     });
