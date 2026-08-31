@@ -91,25 +91,28 @@ const Admin = () => {
             title="New Users (Monthly)"
           />
         </div>
-
-        <HomeChart
-          title="Active Subscriptions (Monthly)"
-          data={data.activeSubscriptions}
-          config={{
-            active: { label: "Active Subscriptions", color: "#4ade80" },
-          }}
-          axisKey="month"
-          height={200}
-        />
-        <HomeChart
-          title="Training Sessions (Monthly)"
-          data={data.trainingSessions}
-          config={{
-            sessions: { label: "Training Sessions", color: "#f97316" },
-          }}
-          axisKey="month"
-          height={200}
-        />
+        <div className="col-span-2 lg:col-span-1">
+          <HomeChart
+            title="Active Subscriptions (Monthly)"
+            data={data.activeSubscriptions}
+            config={{
+              active: { label: "Active Subscriptions", color: "#4ade80" },
+            }}
+            axisKey="month"
+            height={200}
+          />
+        </div>
+        <div className="col-span-2 lg:col-span-1">
+          <HomeChart
+            title="Training Sessions (Monthly)"
+            data={data.trainingSessions}
+            config={{
+              sessions: { label: "Training Sessions", color: "#f97316" },
+            }}
+            axisKey="month"
+            height={200}
+          />
+        </div>
       </div>
     </div>
   );
