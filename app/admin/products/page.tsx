@@ -17,7 +17,7 @@ const Products = () => {
         console.error("Error fetching plan", err);
         setLoading(false);
       });
-  });
+  },[]);
 
   if (loading) return <div>جاري التحميل...</div>;
   if (!products) return <div>الخطة غير موجودة.</div>;

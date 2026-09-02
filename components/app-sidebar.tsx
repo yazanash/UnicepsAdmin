@@ -7,6 +7,7 @@ import {
   Settings,
   DollarSignIcon,
   SubscriptIcon,
+  LetterTextIcon,
 } from "lucide-react";
 import {
   Sidebar,
@@ -59,6 +60,11 @@ const items = [
     title: "Admins",
     url: "/admin/admins",
     icon: Settings,
+  },
+  {
+    title: "Routine Templates",
+    url: "/admin/routines",
+    icon: LetterTextIcon,
   },
 ];
 
