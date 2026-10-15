@@ -31,7 +31,6 @@ const SubscriptionsTable = ({ subs }: SubscriptionsProps) => {
   const handleSearch = async () => {
     setIsLoading(true);
     try {
-      // تحديد نوع البيانات المتوقعة من الـ API
       const res = await api.get<SubscriptionType[]>(
         `/Membership/pending-subscriptions`,
         {

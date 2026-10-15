@@ -1,7 +1,7 @@
 import PlansPricing from "./components/PlansPricing";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Plan } from "@/types/plans";
+// import { Plan } from "@/types/plans";
 import { apiServerGet } from "@/lib/api-server";
 const PlansPage = async ({
   params,
@@ -10,7 +10,7 @@ const PlansPage = async ({
 }) => {
   const { productId } = await params;
   const res = await apiServerGet(`/Plan/GetAllPlans/${productId}`,);
-  const plans: Plan[] = res;
+  // const plans: Plan[] = res;
   return (
     <div className="p-6">
       <div className="flex items-center justify-between my-3">
@@ -21,7 +21,7 @@ const PlansPage = async ({
         </Link>
       </div>
 
-      <PlansPricing plans={plans} />
+      {/* <PlansPricing plans={plans} /> */}
     </div>
   );
 };
