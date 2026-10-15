@@ -18,9 +18,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Plan } from "@/types/plans";
+import { PlanItem } from "@/types/plans";
+// import { Plan } from "@/types/plans";
 interface PlanPricingProps {
-  plans: Plan[];
+  plans: PlanItem[];
   // planItemStats: Record<number, number>; // {itemId: subscriptionCount}
 }
 
@@ -61,7 +62,7 @@ const PlansPricing = ({ plans }: PlanPricingProps) => {
                 </TableHeader>
 
                 <TableBody>
-                  {plan.planItems.map((item) => (
+                  {/* {plan.planItems.map((item) => (
                     <TableRow key={item.id}>
                       <TableCell>{item.durationString}</TableCell>
 
@@ -71,9 +72,8 @@ const PlansPricing = ({ plans }: PlanPricingProps) => {
                       <TableCell className="font-medium">
                         {item.daysCount}
                       </TableCell>
-                      {/* <TableCell>{planItemStats[item.id] ?? 0}</TableCell> */}
                     </TableRow>
-                  ))}
+                  ))} */}
                 </TableBody>
               </Table>
             </CardContent>
