@@ -5,7 +5,7 @@ import LightOrbs from "../components/LightOrbs";
 import FeaturesSection from "./components/FeaturesSection";
 import StepsSection from "./components/StepsSection";
 import { ProductLandingData } from "@/types/productLanding";
-import PricingSection from "./components/PricingSection";
+// import PricingSection from "./components/PricingSection";
 import DownloadBar from "./components/DownloadBar";
 import FAQSection from "./components/FAQSection";
 const ProductPage = ({
@@ -50,11 +50,11 @@ const ProductPage = ({
           title: langDict.stepsTitle,
         }}
       />
-      <PricingSection
+      {/* <PricingSection
         pricingPlans={data.pricingPlans}
         lang={lang}
         dict={langDict}
-      />
+      /> */}
 
       <FAQSection
         faqs={data.faQs}
