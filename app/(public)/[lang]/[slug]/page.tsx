@@ -77,7 +77,7 @@ const ProductLandingPage = async ({
     sku: data.product.id,
     offers: data.pricingPlans.map((plan) => ({
       "@type": "Offer",
-      price: plan.planItems[0]?.price ?? 0,
+      price: plan.price ?? 0,
       priceCurrency: "USD",
       url: productUrl,
       availability: "https://schema.org/InStock",
