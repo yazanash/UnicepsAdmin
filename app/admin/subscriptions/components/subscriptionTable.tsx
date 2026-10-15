@@ -25,13 +25,12 @@ const SubscriptionsTable = ({ subs }: SubscriptionsProps) => {
   const [searchEmail, setSearchEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const updateStatus = (id: string) => {
+  const updateStatus = (id: String) => {
     setLocalSubs((prev) => prev.filter((req) => req.id !== id));
   };
   const handleSearch = async () => {
     setIsLoading(true);
     try {
-      // تحديد نوع البيانات المتوقعة من الـ API
       const res = await api.get<SubscriptionType[]>(
         `/Membership/pending-subscriptions`,
         {
