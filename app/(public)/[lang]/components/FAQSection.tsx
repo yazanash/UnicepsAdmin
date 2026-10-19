@@ -25,7 +25,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({ faqs = [], lang }) => {
   };
 
   return (
-    <section className="relative max-w-4xl mx-auto">
+    <section id="FAQs" className="relative max-w-4xl mx-auto">
       {/* Section Header */}
       <div className="text-center mb-12">
         <span className="bg-teal-500/10 text-teal-400 text-xs font-bold px-3.5 py-1.5 rounded-full border border-teal-500/20 uppercase tracking-widest">
@@ -63,16 +63,27 @@ const FAQSection: React.FC<FAQSectionProps> = ({ faqs = [], lang }) => {
                 <span className="pe-4">
                   {isAr ? faq.questionAr : faq.question}
                 </span>
-                <span className="w-7 h-7 rounded-xl bg-dark-950 flex items-center justify-center text-teal-400 text-base shrink-0 border border-slate-800">
+                <span
+                  className={`w-7 h-7 rounded-xl bg-dark-950 flex items-center justify-center text-teal-400 text-base shrink-0 border border-slate-800 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                >
                   {isOpen ? "−" : "+"}
                 </span>
               </button>
 
-              {isOpen && (
-                <div className="px-5 pb-5 text-xs text-slate-300 border-t border-slate-800/60 pt-4 leading-relaxed">
-                  {isAr ? faq.answerAr : faq.answer}
+              {/* Smooth Grid Animation Wrapper */}
+              <div
+                className={`grid transition-all duration-300 ease-in-out ${
+                  isOpen
+                    ? "grid-rows-[1fr] opacity-100 pb-5 px-5"
+                    : "grid-rows-[0fr] opacity-0 pb-0 px-5"
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <div className="text-xs text-slate-300 border-t border-slate-800/60 pt-4 leading-relaxed">
+                    {isAr ? faq.answerAr : faq.answer}
+                  </div>
                 </div>
-              )}
+              </div>
             </div>
           );
         })}

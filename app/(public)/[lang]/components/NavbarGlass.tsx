@@ -40,19 +40,19 @@ const NavbarGlass: React.FC<NavbarGlassProps> = ({ dict, lang }) => {
   const navLinks = [
     {
       name: dict?.ecosystem || (lang === "ar" ? "المنظومة" : "Ecosystem"),
-      href: "#ecosystem",
+      href: "#features",
     },
     {
       name: dict?.pricing || (lang === "ar" ? "الباقات والأسعار" : "Pricing"),
       href: "#pricing",
     },
-    {
-      name: dict?.updates || (lang === "ar" ? "التحديثات" : "Releases"),
-      href: "#updates",
-    },
+    // {
+    //   name: dict?.updates || (lang === "ar" ? "التحديثات" : "Releases"),
+    //   href: "#updates",
+    // },
     {
       name: dict?.faq || (lang === "ar" ? "الأسئلة الشائعة" : "FAQ"),
-      href: "#faq",
+      href: "#FAQs",
     },
   ];
 
@@ -82,7 +82,7 @@ const NavbarGlass: React.FC<NavbarGlassProps> = ({ dict, lang }) => {
             priority
           />
           <span className="text-white font-black text-lg tracking-wider">
-            UNICEPS<span className="text-teal-400">.</span>
+            UNICEPS
           </span>
         </Link>
 
@@ -97,6 +97,12 @@ const NavbarGlass: React.FC<NavbarGlassProps> = ({ dict, lang }) => {
               {link.name}
             </a>
           ))}
+          <a
+            href="#pricing"
+            className="bg-teal-500 hover:bg-teal-400 text-dark-950 font-black text-xs px-4 py-2 rounded-xl transition-all shadow-lg shadow-teal-500/20 shrink-0"
+          >
+            {dict?.getStarted || (lang === "ar" ? "تنزيل" : "Download")}
+          </a>
         </div>
 
         {/* Actions & Utilities */}
@@ -111,21 +117,13 @@ const NavbarGlass: React.FC<NavbarGlassProps> = ({ dict, lang }) => {
 
           {/* Admin link */}
           <Link
-            href={`/${lang}/admin`}
+            href={`/admin`}
             className="text-slate-300 hover:text-white text-xs font-medium px-2 py-1.5 transition-colors"
           >
             {dict?.adminDashboard || (lang === "ar" ? "الآدمن" : "Admin")}
           </Link>
 
           {/* Main Direct Action Button (Primary CTA) */}
-          <a
-            href="#pricing"
-            className="bg-teal-500 hover:bg-teal-400 text-dark-950 font-black text-xs px-4 py-2 rounded-xl transition-all shadow-lg shadow-teal-500/20 shrink-0"
-          >
-            💳{" "}
-            {dict?.getStarted ||
-              (lang === "ar" ? "الاشتراك والأسعار" : "Get Started")}
-          </a>
         </div>
 
         {/* Mobile Hamburger Button */}
@@ -162,7 +160,7 @@ const NavbarGlass: React.FC<NavbarGlassProps> = ({ dict, lang }) => {
           ))}
           <div className="flex items-center justify-between pt-2">
             <Link
-              href={`/${lang}/admin`}
+              href="/admin"
               onClick={() => setMobileMenuOpen(false)}
               className="text-slate-300 hover:text-white"
             >

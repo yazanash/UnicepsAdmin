@@ -4,8 +4,10 @@ export interface CashRequestType {
   paymentGateway: String;
   subscription: String;
   transferCode: String;
-  amount: String;
-  imageUrl: String;
   status: String;
   createdAt: String;
+  subscriptionPrice: number;
+  couponCode: string | null;
+  couponValue: number;
+  finalPrice: number;
 }

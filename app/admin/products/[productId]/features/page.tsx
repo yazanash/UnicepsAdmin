@@ -20,7 +20,18 @@ const FeaturesPage = () => {
   const productId = params.productId;
   const [features, setFeatures] = useState<FeatureType[] | null>(null);
   const [loading, setLoading] = useState(true);
+  const handleDelete = async (featureId: number) => {
+    if (!confirm("Are you sure you want to delete this feature?")) {
+      return;
+    }
 
+    try {
+      await api.delete(`/Feature/${featureId}`);
+      setFeatures((prev) => prev?.filter((f) => f.id !== featureId) || []);
+    } catch (error) {
+      console.error("Failed to delete feature", error);
+    }
+  };
   useEffect(() => {
     api
       .get(`/Feature/product/${productId}`)
@@ -47,7 +58,6 @@ const FeaturesPage = () => {
               const res = await api.post(`/Feature`, feature);
               const createdFeature = res.data;
               setFeatures((prev) => {
-                // إذا كانت الحالة السابقة نل، اعتبرها مصفوفة فارغة ثم أضف العنصر
                 const currentFeatures = prev || [];
                 return [...currentFeatures, createdFeature];
               });
@@ -75,17 +85,25 @@ const FeaturesPage = () => {
                     <FeatureModal
                       productId={Number(productId)}
                       feature={req} // نمرر البيانات الحالية هنا
-                      onSave={async (feature) => {
-                        const res = await api.put(`/Feature/${feature.id}`, feature);
+                      onSave={async (data) => {
+                        const res = await api.put(`/Feature/${req.id}`, data);
                         const createdFeature = res.data;
                         setFeatures(
                           (prev) =>
                             prev?.map((f) =>
-                              f.id === feature.id ? feature : f
-                            ) || []
+                              f.id === createdFeature.id ? createdFeature : f,
+                            ) || [],
                         );
                       }}
                     />
+                    <Button
+                      variant="destructive"
+                      size="icon"
+                      onClick={() => handleDelete(req.id)}
+                      className="h-8 w-8"
+                    >
+                      🗑️
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}

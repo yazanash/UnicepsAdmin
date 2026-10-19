@@ -1,12 +1,6 @@
-import WhyUniceps from "./components/WhyUniceps";
-import CoreProducts from "./components/CoreProducts";
-import Promises from "./components/Promises";
-import FinalCTA from "./components/FinalCTA";
 import { apiServerGet } from "@/lib/api-server";
-import HeroSliderWrapper from "./components/HeroSliderWrapper";
 import { getDictionary } from "@/lib/get-dictionary";
 import { Locale } from "@/lib/i18n-config";
-import HeroPathSelector from "./components/HeroPathSelector";
 import EcosystemWrapper from "./components/EcosystemMainView";
 const welcome = async ({ params }: { params: Promise<{ lang: Locale }> }) => {
   const { lang } = await params;
