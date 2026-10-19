@@ -1,6 +1,6 @@
 "use client";
 // import { Plan } from "@/types/plans";
-import ManagePlan from "../components/ManagePlan";
+
 import { api } from "@/lib/api";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
