@@ -10,7 +10,7 @@ const FeatureCard = ({ feature, isAr, baseUrl }: FeatureCardProps) => {
   return (
     <div
       key={feature.id}
-      className="relative group overflow-hidden rounded-3xl border border-slate-800 bg-dark-900 shadow-xl h-[400px] flex flex-col justify-end"
+      className="relative group overflow-hidden rounded-3xl border border-slate-800 bg-dark-900 shadow-xl h-100 flex flex-col justify-end"
     >
       {/* Background Image with Hover Effect */}
       {feature.imageUrl ? (
@@ -27,7 +27,7 @@ const FeatureCard = ({ feature, isAr, baseUrl }: FeatureCardProps) => {
       )}
 
       {/* Dark Gradient Shade (Overlay) from bottom to center */}
-     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none" />
+     <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent pointer-events-none" />
       {/* Content Layer over the Shade */}
       <div className="relative z-10 p-6 flex flex-col justify-end">
         <h3 className="font-black text-lg md:text-xl text-white mb-2 leading-tight">
