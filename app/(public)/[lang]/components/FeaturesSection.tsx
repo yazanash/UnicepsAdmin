@@ -1,29 +1,34 @@
 "use client";
 import React from "react";
-
-interface FeatureItem {
-  id: number;
-  title: string;
-  titleAr: string;
-  description: string;
-  descriptionAr: string;
-}
-
+import Image from "next/image";
+import FeatureCard from "./FeatureCard";
+import { FeatureType } from "@/types/productFeature";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 interface FeaturesSectionProps {
-  features: FeatureItem[];
+  features: FeatureType[];
   lang: string;
+  // onSlideChange: (index: number) => void;
+  // buttonText: string;
 }
 
 const FeaturesSection: React.FC<FeaturesSectionProps> = ({
   features = [],
   lang,
+  // onSlideChange,
+  // buttonText,
 }) => {
   if (!features || features.length === 0) return null;
 
   const isAr = lang === "ar";
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
   return (
-    <section className="relative">
+    <section id="features" className="relative">
       {/* Section Header */}
       <div className="text-center mb-12">
         <span className="bg-teal-500/10 text-teal-400 text-xs font-bold px-3.5 py-1.5 rounded-full border border-teal-500/20 uppercase tracking-widest">
@@ -40,32 +45,33 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({
             : "Advanced technical capabilities designed to give you peak performance."}
         </p>
       </div>
-
-      {/* Features Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2  gap-6 max-w-4xl mx-auto">
-        {features.map((feature) => (
-          <div
-            key={feature.id}
-            className="bg-dark-900/60 border border-slate-800/80 p-6 rounded-3xl hover:border-teal-500/40 transition-all duration-300 shadow-xl flex flex-col justify-between group"
-          >
-            <div>
-              {/* Check Icon or Badge */}
-              <div className="w-10 h-10 rounded-2xl bg-teal-500/10 text-teal-400 flex items-center justify-center font-black text-sm mb-4 border border-teal-500/20 group-hover:bg-teal-500 group-hover:text-dark-950 transition-colors">
-                ✓
-              </div>
-
-              {/* Title */}
-              <h3 className="font-bold text-base text-white mb-2">
-                {isAr ? feature.titleAr : feature.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-xs text-slate-400 leading-relaxed">
-                {isAr ? feature.descriptionAr : feature.description}
-              </p>
-            </div>
-          </div>
-        ))}
+      <div className="relative z-10 max-w-4xl h-full mx-auto py-2">
+        <Swiper
+          modules={[Autoplay, Navigation, Pagination]}
+          spaceBetween={20}
+          slidesPerView={1}
+          pagination={{ clickable: true }}
+          // onSlideChange={(swiper: SwiperType) =>
+          //   onSlideChange(swiper.realIndex)
+          // }
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }}
+          loop={true}
+          className="w-full h-full"
+        >
+          {features.map((feature, index) => (
+            <SwiperSlide key={feature.id}>
+              <FeatureCard
+                feature={feature}
+                isAr={isAr}
+                baseUrl={BASE_URL ?? ""}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </section>
   );

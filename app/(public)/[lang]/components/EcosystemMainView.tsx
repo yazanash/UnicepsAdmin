@@ -2,9 +2,10 @@
 import React, { useState, useEffect } from "react";
 import FeaturesSection from "./FeaturesSection";
 import { apiServerGet } from "@/lib/api-server";
-import StepsSection from "./StepsSection";
 import PricingSection from "./PricingSection";
 import FAQSection from "./FAQSection";
+import DownloadCTASection from "./DownloadCTASection";
+import DynamicProductSEO from "./DynamicProductSEO";
 interface EcosystemWrapperProps {
   products: any[];
   lang: string;
@@ -56,14 +57,18 @@ const EcosystemWrapper: React.FC<EcosystemWrapperProps> = ({
 
   return (
     <div className="max-w-7xl mx-auto px-6 pb-24 pt-16">
-      {/* ==================== PATH SELECTOR (أزرار اختيار المسار) ==================== */}
+      <DynamicProductSEO
+        landingData={landingData}
+        lang={lang}
+        activeSlug={activeSlug}
+      />
       <section className="text-center py-6 mb-8">
-        <div className="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/20 text-teal-400 text-xs font-bold px-3.5 py-1.5 rounded-full mb-4">
+        {/* <div className="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/20 text-teal-400 text-xs font-bold px-3.5 py-1.5 rounded-full mb-4">
           <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
           {lang === "ar"
             ? "منظومة Uniceps الرياضية"
             : "Uniceps Sports Ecosystem"}
-        </div>
+        </div> */}
 
         <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight mb-4">
           {lang === "ar"
@@ -110,8 +115,12 @@ const EcosystemWrapper: React.FC<EcosystemWrapperProps> = ({
       ) : landingData ? (
         <div className="space-y-20 transition-all duration-300">
           <FeaturesSection features={landingData.features} lang={lang} />
-          <StepsSection steps={landingData.steps} lang={lang} />
+          {/* <StepsSection steps={landingData.steps} lang={lang} /> */}
           <PricingSection pricingPlans={landingData.pricingPlans} lang={lang} />
+          <DownloadCTASection
+            releases={landingData.latestReleases}
+            lang={lang}
+          />
           <FAQSection faqs={landingData.faQs} lang={lang} />
         </div>
       ) : (

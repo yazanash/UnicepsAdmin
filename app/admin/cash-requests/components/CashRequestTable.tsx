@@ -19,14 +19,10 @@ interface CashRequestProps {
 }
 
 const CashRequestTable = ({ requests }: CashRequestProps) => {
-   const [localRequests, setLocalRequests] = useState(requests);
+  const [localRequests, setLocalRequests] = useState(requests);
 
   const updateStatus = (id: String, status: String) => {
-    setLocalRequests((prev) =>
-      prev.map((req) =>
-        req.id === id ? { ...req, status } : req
-      )
-    );
+    setLocalRequests((prev) => prev.filter((req) => req.id !== id));
   };
   return (
     <div className="p-6 space-y-6">
@@ -43,8 +39,9 @@ const CashRequestTable = ({ requests }: CashRequestProps) => {
                 <TableHead>Email</TableHead>
                 <TableHead>PaymentGateway</TableHead>
                 <TableHead>Subscription</TableHead>
+                <TableHead>Price</TableHead>
+                <TableHead>Coupon</TableHead>
                 <TableHead>TransferCode</TableHead>
-                <TableHead>Amount</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>CreatedAt</TableHead>
                 <TableHead>Actions</TableHead>
@@ -56,31 +53,42 @@ const CashRequestTable = ({ requests }: CashRequestProps) => {
                   <TableCell>{req.id}</TableCell>
                   <TableCell>{req.email}</TableCell>
                   <TableCell>{req.paymentGateway}</TableCell>
-                  <TableCell>{req.subscription}</TableCell>
+                  <TableCell>
+                    {req.subscription}-{req.subscriptionPrice}
+                  </TableCell>
+                  <TableCell>{req.finalPrice ?? "-"}</TableCell>
+                  <TableCell>{req.couponCode ?? "-"} </TableCell>
                   <TableCell>{req.transferCode ?? "-"}</TableCell>
-                  <TableCell>{req.amount ?? "-"}</TableCell>
                   <TableCell>{req.status}</TableCell>
                   <TableCell>{req.createdAt}</TableCell>
                   <TableCell>
                     <CashRequestModal
                       request={req}
-                      onAccept={async (id) => {
-                       const res =  await api.post(`/CashRequest/ChangeCashRequestStatus`, {
-                          id: id,
-                          cashRequestStatus: 1,
-                        });
+                      onAccept={async (id, message?) => {
+                        const res = await api.post(
+                          `/CashRequest/ChangeCashRequestStatus`,
+                          {
+                            id: id,
+                            cashRequestStatus: 1,
+                            message,
+                          },
+                        );
                         console.log(res.status);
-                        if(res.status===200){
-                          updateStatus(id,"Accepted")
+                        if (res.status === 200) {
+                          updateStatus(id, "Accepted");
                         }
                       }}
-                      onDecline={async (id) => {
-                       const res =  await api.post(`/CashRequest/ChangeCashRequestStatus`, {
-                          id: id,
-                          cashRequestStatus: 2,
-                        });
-                         if(res.status===200){
-                          updateStatus(id,"Declined")
+                      onDecline={async (id, message?) => {
+                        const res = await api.post(
+                          `/CashRequest/ChangeCashRequestStatus`,
+                          {
+                            id: id,
+                            cashRequestStatus: 2,
+                            message,
+                          },
+                        );
+                        if (res.status === 200) {
+                          updateStatus(id, "Declined");
                         }
                       }}
                     />
