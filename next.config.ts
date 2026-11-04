@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/:lang(en|ar)/:slug",
-        destination: "/:lang?tab=:slug",
+        destination: "/:lang",
         permanent: true, // 301 Redirect لنقل أرشفة جوجل
       },
     ];
