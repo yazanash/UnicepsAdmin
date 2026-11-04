@@ -39,9 +39,10 @@ export default function NewReleasePage() {
 
   const [version, setVersion] = useState("");
   const [downloadUrl, setdownloadUrl] = useState("");
+  const [isUrgent, setIsUrgent] = useState(false);
   const [targetOS, setTargetOS] = useState(TargetOSEnum.Windows);
   const [downloadSource, setDownloadSource] = useState(
-    DownloadSourceEnum.Website
+    DownloadSourceEnum.Website,
   );
   const [changeLog, setChangeLog] = useState("");
   const [changeLogAr, setChangeLogAr] = useState("");
@@ -164,7 +165,15 @@ export default function NewReleasePage() {
             </SelectContent>
           </Select>
         </div>
-
+        <div className="flex flex-row items-center space-x-2">
+          <Input
+            type="checkbox"
+            className="h-4 w-4 rounded border-gray-300 px-0" // تعديل الحجم والشكل ليناسب الـ checkbox
+            checked={isUrgent}
+            onChange={(e) => setIsUrgent(e.target.checked)}
+          />
+          <Label className="cursor-pointer">Is Urgent</Label>
+        </div>
         <div className="col-span-3 space-y-2">
           <Label>ChangeLog</Label>
           <Textarea
