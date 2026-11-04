@@ -83,7 +83,7 @@ const EcosystemWrapper: React.FC<EcosystemWrapperProps> = ({
         </p>
 
         {/* أزرار اختيار المسار */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto bg-dark-900 border border-slate-800 p-2.5 rounded-2xl shadow-2xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-3xl mx-auto bg-dark-900 border border-slate-800 p-2.5 rounded-2xl shadow-2xl">
           {products.map((prod) => {
             const isActive = prod.slug === activeSlug;
             const icon =

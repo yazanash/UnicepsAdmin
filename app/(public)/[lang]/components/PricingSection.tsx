@@ -76,14 +76,6 @@ const PricingSection: React.FC<PricingSectionProps> = ({
                   </span>
                 </div>
               </div>
-
-              {/* Action Button */}
-              <a
-                href={`/checkout?planItemId=${planItem.id}`}
-                className="w-full text-center block bg-teal-500 hover:bg-teal-400 text-dark-950 font-black text-xs py-3.5 rounded-xl transition shadow-lg shadow-teal-500/10"
-              >
-                {isAr ? "اشترك الآن ←" : "Subscribe Now →"}
-              </a>
             </div>
           );
         })}

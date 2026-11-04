@@ -2,20 +2,29 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  output: 'standalone',
+  async redirects() {
+    return [
+      {
+        source: "/:lang(en|ar)/:slug",
+        destination: "/:lang?tab=:slug",
+        permanent: true, // 301 Redirect لنقل أرشفة جوجل
+      },
+    ];
+  },
+  output: "standalone",
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'uniceps.runasp.net',
-        port: '',
-        pathname: '/**', 
+        protocol: "https",
+        hostname: "uniceps.runasp.net",
+        port: "",
+        pathname: "/**",
       },
-       {
-        protocol: 'https',
-        hostname: 'uniapi.trio-verse.com',
-        port: '',
-        pathname: '/**',
+      {
+        protocol: "https",
+        hostname: "uniapi.trio-verse.com",
+        port: "",
+        pathname: "/**",
       },
     ],
   },

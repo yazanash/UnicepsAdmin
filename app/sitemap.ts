@@ -17,7 +17,6 @@ async function fetchProducts() {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const products = await fetchProducts();
   const staticPages = ["", "/terms", "/privacy"];
 
   let sitemapEntries: MetadataRoute.Sitemap = [];
@@ -31,21 +30,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         languages: {
           ar: `${baseUrl}/ar${page}`,
           en: `${baseUrl}/en${page}`,
-        },
-      },
-    });
-  });
-
-  // 2. المنتجات الديناميكية
-  products.forEach((slug: string) => {
-    // الـ slug هو string هون
-    sitemapEntries.push({
-      url: `${baseUrl}/en/${slug}`, // استخدم slug مباشرة
-      lastModified: new Date(), // بما أننا ما سحبنا التاريخ من الـ API
-      alternates: {
-        languages: {
-          ar: `${baseUrl}/ar/${slug}`,
-          en: `${baseUrl}/en/${slug}`,
         },
       },
     });
