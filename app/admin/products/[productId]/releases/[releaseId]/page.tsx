@@ -109,6 +109,7 @@ export default function NewReleasePage() {
       version,
       targetOS,
       downloadSource,
+      isUrgent,
       changeLog,
       changeLogAr,
       downloadUrl: finalDownloadUrl,
