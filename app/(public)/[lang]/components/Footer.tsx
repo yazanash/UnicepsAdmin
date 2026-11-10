@@ -7,7 +7,7 @@ const Footer = ({ dict }: { dict: any }) => {
   return (
     <footer className="relative bg-black pt-24 pb-12 px-6 border-t border-white/5">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
           {/* العمود الأول: الهوية */}
           <div className="space-y-6">
             <div className="flex items-center gap-2">
@@ -25,40 +25,21 @@ const Footer = ({ dict }: { dict: any }) => {
               {dict.description}
             </p>
           </div>
-
-          {/* العمود الثاني: روابط سريعة */}
-          <div>
-            <h4 className="text-white font-bold mb-6">{dict.productsTitle}</h4>
-            <ul className="space-y-4 text-gray-500 text-sm">
-              {dict.products.map((item: string, index: number) => (
-                <li key={index}>
-                  <a
-                    href="#"
-                    className="hover:text-[#46cdcf] transition-colors"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
+          <div className=""></div>
           {/* العمود الثالث: الدعم التقني (الذي ركزت عليه) */}
           <div>
             <h4 className="text-white font-bold mb-6">{dict.supportTitle}</h4>
             <ul className="space-y-4 text-gray-500 text-sm">
-              {dict.supportLinks.map(
-                (link: any, index: number) => (
-                  <li key={index}>
-                    <Link
-                      href={link.url}
-                      className="hover:text-[#46cdcf] transition-colors"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                )
-              )}
+              {dict.supportLinks.map((link: any, index: number) => (
+                <li key={index}>
+                  <Link
+                    href={link.url}
+                    className="hover:text-[#46cdcf] transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
               <li className="pt-2">
                 <span className="block text-white mb-2 font-medium">
                   {dict.helpText}

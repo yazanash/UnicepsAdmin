@@ -2,24 +2,38 @@ import { apiServerGet } from "@/lib/api-server";
 import { getDictionary } from "@/lib/get-dictionary";
 import { Locale } from "@/lib/i18n-config";
 import EcosystemWrapper from "./components/EcosystemMainView";
-const welcome = async ({ params }: { params: Promise<{ lang: Locale }> }) => {
+export const dynamic = "force-dynamic";
+interface PageProps {
+  params: Promise<{ lang: Locale }>;
+  searchParams: Promise<{ product?: string }>;
+}
+const welcome = async ({ params, searchParams }: PageProps) => {
   const { lang } = await params;
+  const { product: queryProductSlug } = await searchParams;
+
   const dict = await getDictionary(lang);
   const products = await apiServerGet("/Product");
 
+  const activeSlug =
+    queryProductSlug || (products.length > 0 ? products[0].slug : "");
+
+  let initialLandingData = null;
+  if (activeSlug) {
+    try {
+      initialLandingData = await apiServerGet(`/ProductLanding/${activeSlug}`);
+    } catch (e) {
+      console.error("Failed to fetch initial landing data", e);
+    }
+  }
   return (
     <main>
-      <EcosystemWrapper products={products} lang={lang} dict={dict} />
-      {/* <HeroSliderWrapper
+      <EcosystemWrapper
         products={products}
         lang={lang}
-        buttonText={dict.common.download}
-      /> */}
-      {/* <HeroPathSelector products={products} lang={lang}  />
-      <WhyUniceps content={dict.whyUniceps} />
-      <CoreProducts products={products} content={dict.solution} lang={lang} />
-      <Promises content={dict.promises} />
-      <FinalCTA content={dict.finalCTA} /> */}
+        dict={dict}
+        initialSlug={activeSlug}
+        initialLandingData={initialLandingData}
+      />
     </main>
   );
 };

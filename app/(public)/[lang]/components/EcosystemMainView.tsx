@@ -1,31 +1,64 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useTransition } from "react";
 import FeaturesSection from "./FeaturesSection";
 import { apiServerGet } from "@/lib/api-server";
 import PricingSection from "./PricingSection";
 import FAQSection from "./FAQSection";
 import DownloadCTASection from "./DownloadCTASection";
 import DynamicProductSEO from "./DynamicProductSEO";
+import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 interface EcosystemWrapperProps {
   products: any[];
   lang: string;
   dict: any;
+  initialSlug: string;
+  initialLandingData: any;
 }
 
 const EcosystemWrapper: React.FC<EcosystemWrapperProps> = ({
   products = [],
   lang,
   dict,
+  initialSlug,
+  initialLandingData,
 }) => {
   // 1. تحديد الـ slug للمنتج النشط افتراضياً
   const [activeSlug, setActiveSlug] = useState<string>(() => {
     return products.length > 0 ? products[0].slug : "";
   });
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [isPending, startTransition] = useTransition();
 
+  // قراءة الـ slug من الرابط مباشرة، وإذا لمطابقته نأخذ الـ initialSlug
+  const currentSlugFromUrl = searchParams.get("product") || initialSlug;
   const [landingData, setLandingData] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   // 2. جلب كل بيانات المنتج بطلب واحد فقط من الرابط عند اختيار المسار
+  useEffect(() => {
+    const urlSlug = searchParams.get("product");
+    if (urlSlug && urlSlug !== activeSlug) {
+      setActiveSlug(urlSlug);
+    } else if (!urlSlug && products.length > 0) {
+      setActiveSlug(products[0].slug);
+    }
+  }, [searchParams, products]);
+  const handleSelectProduct = (slug: string) => {
+    setActiveSlug(slug);
+
+    // تحديث الـ URL Query Parameters بدون إعادة تحميل الصفحة
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("product", slug);
+
+    startTransition(() => {
+      const newUrl = `?${params.toString()}` as string;
+      window.history.pushState({}, "", newUrl);
+    });
+  };
+
+  // جلب البيانات عند تغير الـ activeSlug
   useEffect(() => {
     if (!activeSlug) return;
     let isMounted = true;
@@ -33,9 +66,7 @@ const EcosystemWrapper: React.FC<EcosystemWrapperProps> = ({
 
     const fetchData = async () => {
       try {
-        // بما أننا في Client Component، نطلب الـ API أو مسار الـ fetch المخصص
         const res = await apiServerGet(`/ProductLanding/${activeSlug}`);
-
         if (isMounted) {
           setLandingData(res);
           setLoading(false);
@@ -54,7 +85,6 @@ const EcosystemWrapper: React.FC<EcosystemWrapperProps> = ({
       isMounted = false;
     };
   }, [activeSlug]);
-
   return (
     <div className="max-w-7xl mx-auto px-6 pb-24 pt-16">
       <DynamicProductSEO
@@ -92,7 +122,7 @@ const EcosystemWrapper: React.FC<EcosystemWrapperProps> = ({
             return (
               <button
                 key={prod.id}
-                onClick={() => setActiveSlug(prod.slug)}
+                onClick={() => handleSelectProduct(prod.slug)}
                 className={`py-3.5 px-4 rounded-xl text-xs font-black transition-all flex items-center justify-center gap-2.5 ${
                   isActive
                     ? "bg-teal-500 text-dark-950 shadow-lg shadow-teal-500/20 scale-[1.02]"
