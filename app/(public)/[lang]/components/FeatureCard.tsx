@@ -15,11 +15,11 @@ const FeatureCard = ({ feature, isAr, baseUrl }: FeatureCardProps) => {
       {/* Background Image with Hover Effect */}
       {feature.imageUrl ? (
         <Image
-          src={`${baseUrl}${feature.imageUrl}`}
-          alt={feature.title || "Feature Image"}
-          fill
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
-        />
+      src={`${baseUrl}${feature.imageUrl}`}
+      alt={feature.title || "Feature Image"}
+      fill
+      className="object-cover group-hover:scale-105 transition-transform duration-500"
+    />
       ) : (
         <div className="absolute inset-0 bg-dark-950 flex items-center justify-center text-slate-600">
           <span>{isAr ? "لا توجد صورة" : "No Image"}</span>
