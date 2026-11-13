@@ -98,7 +98,7 @@ const NavbarGlass: React.FC<NavbarGlassProps> = ({ dict, lang }) => {
             </a>
           ))}
           <a
-            href="#pricing"
+            href="#download"
             className="bg-teal-500 hover:bg-teal-400 text-dark-950 font-black text-xs px-4 py-2 rounded-xl transition-all shadow-lg shadow-teal-500/20 shrink-0"
           >
             {dict?.getStarted || (lang === "ar" ? "تنزيل" : "Download")}
@@ -147,13 +147,13 @@ const NavbarGlass: React.FC<NavbarGlassProps> = ({ dict, lang }) => {
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-dark-950 border-b border-slate-700 px-6 py-5 flex flex-col gap-4 text-xs font-bold text-slate-200 shadow-2xl">
+        <div className="md:hiddenbg-teal-950/20 backdrop-blur-md border-b border-slate-700/80 shadow-xl shadow-black/80 px-6 py-5 flex flex-col gap-4 text-xs font-bold text-slate-200 shadow-2xl">
           {navLinks.map((link, idx) => (
             <a
               key={idx}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="hover:text-teal-400 py-2 border-b border-slate-800"
+              className="hover:text-teal-400 py-2  border-slate-800"
             >
               {link.name}
             </a>
@@ -169,13 +169,11 @@ const NavbarGlass: React.FC<NavbarGlassProps> = ({ dict, lang }) => {
                 (lang === "ar" ? "لوحة التحكم" : "Admin")}
             </Link>
             <a
-              href="#pricing"
+              href="#download"
               onClick={() => setMobileMenuOpen(false)}
               className="bg-teal-500 text-dark-950 font-black px-4 py-2 rounded-xl"
             >
-              💳{" "}
-              {dict?.getStarted ||
-                (lang === "ar" ? "الاشتراك والأسعار" : "Get Started")}
+              {dict?.getStarted || (lang === "ar" ? "تنزيل" : "Download")}
             </a>
           </div>
         </div>
