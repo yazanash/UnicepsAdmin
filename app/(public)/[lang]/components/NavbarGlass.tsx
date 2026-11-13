@@ -147,7 +147,7 @@ const NavbarGlass: React.FC<NavbarGlassProps> = ({ dict, lang }) => {
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hiddenbg-teal-950/20 backdrop-blur-md border-b border-slate-700/80 shadow-xl shadow-black/80 px-6 py-5 flex flex-col gap-4 text-xs font-bold text-slate-200 shadow-2xl">
+        <div className="md:hiddenbg-teal-950/20 backdrop-blur-md border-b border-slate-700/80 shadow-xl shadow-black/80 px-6 py-5 flex flex-col gap-4 text-xs font-bold text-slate-200">
           {navLinks.map((link, idx) => (
             <a
               key={idx}
