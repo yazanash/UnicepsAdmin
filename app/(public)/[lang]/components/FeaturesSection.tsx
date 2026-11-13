@@ -45,22 +45,23 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({
             : "Advanced technical capabilities designed to give you peak performance."}
         </p>
       </div>
-      <div className="relative z-10 max-w-4xl h-full mx-auto py-2">
+      <div className="relative z-10 max-w-6xl h-full mx-auto py-2 px-4">
         <Swiper
           modules={[Autoplay, Navigation, Pagination]}
           spaceBetween={20}
           slidesPerView={1}
           pagination={{ clickable: true }}
-          // onSlideChange={(swiper: SwiperType) =>
-          //   onSlideChange(swiper.realIndex)
-          // }
           autoplay={{
             delay: 2500,
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           }}
           loop={true}
-          className="w-full h-full"
+          breakpoints={{
+            640: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+          className="w-full pb-12"
         >
           {features.map((feature, index) => (
             <SwiperSlide key={feature.id}>
