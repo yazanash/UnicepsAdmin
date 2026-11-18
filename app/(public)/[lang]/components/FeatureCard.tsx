@@ -10,12 +10,17 @@ interface FeatureCardProps {
 const FeatureCard = ({ feature, isAr, baseUrl }: FeatureCardProps) => {
   const imageUrl = feature.imageUrl ? `${baseUrl}${feature.imageUrl}` : "";
 
+  // فحص ذكي: إذا كانت الصورة خاصة بالديسكتوب (أفقية)، نعطيها كرت مستطيل عريض لتبدو كاملة 100% بدون قص
+  const isDesktop = feature.imageUrl?.toLowerCase().includes("desktop") || feature.imageUrl?.toLowerCase().includes("1") || feature.imageUrl?.toLowerCase().includes("4") || feature.imageUrl?.toLowerCase().includes("5") || feature.imageUrl?.toLowerCase().includes("6");
+
   return (
     <div
       key={feature.id}
-      className="relative group overflow-hidden rounded-3xl border border-slate-800 bg-dark-900 shadow-xl w-75 sm:w-85 mx-auto flex flex-col justify-end aspect-square"
+      className={`relative group overflow-hidden rounded-3xl border border-slate-800 bg-dark-900 shadow-xl w-75 sm:w-85 mx-auto flex flex-col justify-end ${
+        isDesktop ? "aspect-[16/10]" : "aspect-square"
+      }`}
     >
-      {/* الصورة تملأ الكارد بالكامل بدون أي فراغات */}
+      {/* الصورة تملأ الكارد بالكامل */}
       {imageUrl ? (
         <div className="absolute inset-0 w-full h-full">
           <Image
@@ -24,7 +29,9 @@ const FeatureCard = ({ feature, isAr, baseUrl }: FeatureCardProps) => {
             fill
             sizes="(max-width: 640px) 300px, 340px"
             quality={90}
-            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+            className={`w-full h-full ${
+              isDesktop ? "object-contain bg-black/40" : "object-cover"
+            } object-center group-hover:scale-105 transition-transform duration-500`}
           />
         </div>
       ) : (
@@ -33,7 +40,7 @@ const FeatureCard = ({ feature, isAr, baseUrl }: FeatureCardProps) => {
         </div>
       )}
 
-      {/* تدرج (Shade) رايق وناعم من الأسفل لتظهر الكتابة بوضوح تام فوق الصورة */}
+      {/* تدرج (Shade) رايق من الأسفل لتظهر الكتابة بوضوح */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent pointer-events-none" />
 
       {/* النصوص فوق الصورة في أسفل الكارد */}
