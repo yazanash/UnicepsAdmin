@@ -13,49 +13,36 @@ const FeatureCard = ({ feature, isAr, baseUrl }: FeatureCardProps) => {
   return (
     <div
       key={feature.id}
-      className="relative group overflow-hidden rounded-3xl border border-slate-800 bg-dark-900 shadow-xl w-full h-[430px] flex flex-col justify-end"
+      // كرت مرن يتكيف مع المحتوى تماماً بدون ارتفاعات وهمية أو قص
+      className="relative group overflow-hidden rounded-3xl border border-slate-800 bg-dark-900 shadow-xl w-75 sm:w-85 mx-auto flex flex-col p-5"
     >
-      {imageUrl ? (
-        <>
-          {/* 1. الخلفية الضبابية لملء المساحة بشكل أنيق وخلفية دمج متناسقة */}
-          <div className="absolute inset-0 overflow-hidden bg-black/60">
+      {/* حاوية الصورة المتكيّفة حسب شكل الصورة الأصلية */}
+      <div className="relative w-full rounded-2xl overflow-hidden bg-black/40 border border-slate-800/80 flex items-center justify-center p-2">
+        {imageUrl ? (
+          // استخدام Next.js Image مع خاصية unoptimized أو اعتماد ارتفاع مرن حسب النسبة
+          <div className="relative w-full aspect-[4/3] flex items-center justify-center">
             <Image
               src={imageUrl}
-              alt="Background Blur"
+              alt={feature.title || "Feature Image"}
               fill
-              className="object-cover object-center filter blur-xl opacity-30 scale-125"
+              sizes="(max-width: 640px) 300px, 340px"
+              quality={90}
+              className="object-contain object-center group-hover:scale-105 transition-transform duration-500"
             />
           </div>
-
-          {/* 2. حاوية الصورة الرئيسية (تأخذ المساحة العلوية للكرت وتترك مكان للنصوص بالأسفل) */}
-          <div className="absolute inset-x-0 top-0 bottom-28 p-4 flex items-center justify-center">
-            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-slate-700/50 shadow-lg bg-black/40">
-              <Image
-                src={imageUrl}
-                alt={feature.title || "Feature Image"}
-                fill
-                sizes="(max-width: 640px) 300px, 340px"
-                quality={90}
-                className="object-contain object-center p-2 group-hover:scale-105 transition-transform duration-500"
-              />
-            </div>
+        ) : (
+          <div className="w-full h-40 flex items-center justify-center text-slate-600">
+            <span>{isAr ? "لا توجد صورة" : "No Image"}</span>
           </div>
-        </>
-      ) : (
-        <div className="absolute inset-0 bg-dark-950 flex items-center justify-center text-slate-600">
-          <span>{isAr ? "لا توجد صورة" : "No Image"}</span>
-        </div>
-      )}
+        )}
+      </div>
 
-      {/* تدرج الأسود تحت النصوص لضمان قراءتها بوضوح تام */}
-      <div className="absolute inset-0 bg-linear-to-t from-black via-black/80 to-transparent pointer-events-none" />
-
-      {/* صندوق النصوص في أسفل الكرت */}
-      <div className="relative z-10 p-6 flex flex-col justify-end">
-        <h3 className="font-black text-lg md:text-xl text-white mb-2 leading-tight">
+      {/* النصوص بالأسفل بمرونة تامة */}
+      <div className="relative z-10 flex flex-col mt-4">
+        <h3 className="font-black text-lg md:text-xl text-white mb-1.5 leading-tight">
           {isAr ? feature.titleAr : feature.title}
         </h3>
-        <p className="text-xs md:text-sm text-slate-300 leading-relaxed line-clamp-2">
+        <p className="text-xs md:text-sm text-slate-300 leading-relaxed line-clamp-3">
           {isAr ? feature.descriptionAr : feature.description}
         </p>
       </div>
