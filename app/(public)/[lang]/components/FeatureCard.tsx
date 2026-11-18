@@ -17,26 +17,28 @@ const FeatureCard = ({ feature, isAr, baseUrl }: FeatureCardProps) => {
     >
       {imageUrl ? (
         <>
-          {/* 1. خلفية ضبابية ممتدة لملء الفراغات بنفس ألوان اللقطة */}
-          <div className="absolute inset-0 overflow-hidden">
+          {/* 1. الخلفية الضبابية مع تغميق إضافي لدمجها بسلاسة مع الكرت */}
+          <div className="absolute inset-0 overflow-hidden bg-black/60">
             <Image
               src={imageUrl}
               alt="Background Blur"
               fill
-              className="object-cover object-center filter blur-xl opacity-40 scale-125"
+              className="object-cover object-center filter blur-xl opacity-30 scale-125"
             />
           </div>
 
-          {/* 2. الصورة الرئيسية بوضع contain لتظهر كاملة 100% فوق الخلفية */}
+          {/* 2. الصورة الرئيسية بوضع contain مع border-radius وتغميق خفيف عند الhover */}
           <div className="absolute inset-0 p-6 flex items-center justify-center">
-            <Image
-              src={imageUrl}
-              alt={feature.title || "Feature Image"}
-              fill
-              sizes="(max-width: 640px) 300px, 340px"
-              quality={90}
-              className="object-contain object-center group-hover:scale-105 transition-transform duration-500 p-2"
-            />
+            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-slate-700/50 shadow-lg bg-black/40">
+              <Image
+                src={imageUrl}
+                alt={feature.title || "Feature Image"}
+                fill
+                sizes="(max-width: 640px) 300px, 340px"
+                quality={90}
+                className="object-contain object-center p-2 group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
           </div>
         </>
       ) : (
@@ -45,8 +47,8 @@ const FeatureCard = ({ feature, isAr, baseUrl }: FeatureCardProps) => {
         </div>
       )}
 
-      {/* تدرج الأسود تحت النصوص لضمان وضوحها وقراءتها */}
-      <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent pointer-events-none" />
+      {/* تدرج الأسود تحت النصوص لضمان قراءتها بوضوح */}
+      <div className="absolute inset-0 bg-linear-to-t from-black via-black/70 to-transparent pointer-events-none" />
 
       <div className="relative z-10 p-6 flex flex-col justify-end">
         <h3 className="font-black text-lg md:text-xl text-white mb-2 leading-tight">
